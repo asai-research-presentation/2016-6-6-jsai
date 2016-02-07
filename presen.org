@@ -17,7 +17,33 @@
 Unversity of Tokyo
 #+END_CENTER
 
+#+BEGIN_RESUME
+hello everyone, I am masataro asai presenting the tiebreaking strategies for A* search.
+#+END_RESUME
 #+END_outline-text-1
+
+* Summary
+
+|                         | <c>                 | <c>              |
+| Domain Set              | ［h, fifo］         | ［h, rd, ro］    |
+|                         | Default tiebreaking | Proposed         |
+|                         | in Fast Downward    | Method           |
+|-------------------------+---------------------+------------------|
+| LMcut                   |                     |                  |
+| IPC Instances (1104)    | 558                 | *572.8* (+ 14.8) |
+| Zerocost Instances(680) | 256                 | *294.2* (+ 38.2) |
+| Sum(1724)               | 814                 | *867.0* (+ 53.0) |
+|-------------------------+---------------------+------------------|
+| M&S                     |                     |                  |
+| IPC Instances (1104)    | 479                 | *484.0* (+ 5.0)  |
+| Zerocost Instances(680) | 276                 | *310.2* (+ 34.2) |
+| Sum(1724)               | 755                 | *794.2* (+ 39.2) |
+|-------------------------+---------------------+------------------|
+
+#+BEGIN_RESUME
+Fast Forward, we improved the state of the art just by improving the tiebreaking behavior of A*.
+Our improvement is heuristic-independent. Let's see what's happening.
+#+END_RESUME
 
 * (Optimal) Graph Search
 
@@ -45,6 +71,12 @@ Multiple Sequence Alignment
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
+#+BEGIN_RESUME
+what I talk about in this session is the graph search problem whose task
+is to find a optimal or shortest path from the initial state to the
+goal state.
+#+END_RESUME
+
 # * Dijkstra
 # 
 # [[png:dijkstra]]
@@ -55,59 +87,97 @@ Multiple Sequence Alignment
 
 [[png:astar]]
 
-* Optimal Search with A*
+#+BEGIN_RESUME
+currently, the most prevarent method for optimal graph search is A* algorithm.
+In A*, a node has g-value, which is the current shortest cost from the initial state,
+and h-value, which is a result of a heuristic function h, which should be admissible in the optimal search.
+Their sum, f, is a lower bound of the cost of the shortest path, f*.
+
+In order to prove optimality,
+A* is required to expand all nodes whose f is smaller than f*.  Due to this
+requirement, A* expands the nodes with the smallest f value each time.
+
+However, this description lacks one important aspect of A*.
+#+END_RESUME
+
+* Tiebreaking Strategy.
 
 # Guaranteed to find an optimal solution when /heuristic function/ $h(s)$ is admissible
 
 [[png:astar-emph]]
 
+#+BEGIN_RESUME
+The aspect is the tiebreaking strategy. What happens when more than 2 nodes
+have the same f-minimum? In such cases, a tiebreaking strategy should select which node to expand.
+#+END_RESUME
+
 * Tiebreaking in A*
+
+Research on Tiebreaking is mostly forgotten.
 
 #+BEGIN_CENTER
 How to select from multiple nodes with the same f_{min}?
 #+END_CENTER
 
-|                                | Tiebreaking                           |
-|--------------------------------+---------------------------------------|
-| 1968 Hart, Nilsson and Raphael | *Resolve ties arbitrarily*            |
-| 1984 Pearl's textbook          | *break ties arbitrarily*              |
-| 1985 Korf, AIJ                 | *most recently generated*             |
-|                                | (LIFO order)                          |
-|--------------------------------+---------------------------------------|
-| 2007 Hansen and Zhou           | *least h cost*                        |
-| 2010 Holte                     | *least h cost*                        |
-| 2012 Burns et. al.             | *least h cost* (+ LIFO, undocumented) |
-| Fast Downward (current)        | *least h cost* (+ FIFO, undocumented) |
-|--------------------------------+---------------------------------------|
+|                                | Tiebreaking                                         |
+|--------------------------------+-----------------------------------------------------|
+| Current rule-of-thumb          | select *least h cost* (*h-based tiebreaking*)       |
+|--------------------------------+-----------------------------------------------------|
+| 1968 Hart, Nilsson and Raphael | *least h*, then *arbitrarily* -- *Folklore*?        |
+| 1985 Korf, AIJ                 | *most recently generated* (LIFO) -- forgotten?      |
+|--------------------------------+-----------------------------------------------------|
+| 2007 Hansen and Zhou           | *least h* because it's "well-known" to perform good |
+| 2010 Holte                     | *least h* because it's "most often done"            |
+| 2012 Burns et. al.             | *least h* (+ LIFO, undocumented)                    |
+| Fast Downward (current)        | *least h* (+ FIFO, undocumented)                    |
+|--------------------------------+-----------------------------------------------------|
 
 #+BEGIN_ALIGNRIGHT
 #+BEGIN_LARGER
-*Folklore* that is not empirically tested
-
 ... considered relatively unimportant
-
-(sometimes not mentioned)
 
 #+END_LARGER
 #+END_ALIGNRIGHT
+
+# Nobody cares! Everyone focuses on improving the heuristics or custom search algorithm.
+
+#+BEGIN_RESUME
+The research on tiebreaking strategy of A* is mostly forgotten.
+
+Currently, the rule-of-thumb is to select a node with least h value, which we call h-based tiebreaking.
+This is mentioned in the original paper on A* by Hart and Nilsson,
+and could be seen as one of the oldest folklore in the heuristic search literature.
+
+There are also another tiebreaking method called LIFO order, which was already common in 1985.
+LIFO claims that the nodes should be expanded in most-recently-generated-first.
+
+Recently, we rarely find a detailed description on these strategies.
+It is sometimes said: it's common or it's known to perform well.
+There are sometimes no mention.
+
+We found that the implementation by burns et. al. uses h-based tiebreaking followed by LIFO tiebreaking,
+and that current fast downward uses h-based tiebreaking followed by FIFO tiebreaking.
+Both LIFO and FIFO tiebreaking are not documented.
+In other words, these details are not considered important.
+#+END_RESUME
 
 * Tiebreaking is important
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
 #+BEGIN_SPAN6
+x: # of all nodes in f(s)≦f*
+
 y: # of nodes in f(s)=f*
 
 #+BEGIN_ALIGNRIGHT
 (final plateau)
 #+END_ALIGNRIGHT
 
-x: # of all nodes in f(s)≦f*
-
 #+BEGIN_LARGER
-*Almost all nodes have f(s)=f**.
+*Most nodes have f(s)=f**.
 
-*Performance severely depends on tiebreaking.*
+*Search behavior is determined solely by the tiebreaking strategy.*
 #+END_LARGER
 #+END_SPAN6
 #+BEGIN_SPAN6
@@ -116,19 +186,40 @@ x: # of all nodes in f(s)≦f*
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
+#+BEGIN_RESUME
+However, tiebreaking is actually quite important.
+The plot in the right shows the number of nodes whose f value is less than equal to f*,
+versus those whose f value is equal to f*.
+We call the latter sets of nodes as the final plateau.
+
+In this figure, we can see that most nodes are in the final plateau.
+In a plateau, all nodes have the same f-value,
+so the search behavior is determined solely by the tiebreaking strategy.
+#+END_RESUME
+
 * Notation
 
-| <c>                           | <c>                              |
-| Tiebreaking                   | Description                      |
-| ［criterion_1, criterion_2 ］ | (Break ties in dictionary order) |
-|-------------------------------+----------------------------------|
-|                               | break ties according to h        |
-| ［h, FIFO］                   | same h → break ties in FIFO     |
-|                               | *default setting of FD*          |
-| ［h, LIFO］                   |                                  |
-| ［FIFO］                      | FIFO tiebreaking only            |
-| ［LIFO］                      | LIFO tiebreaking only            |
-|-------------------------------+----------------------------------|
+| <c>                           | <c>                               |
+| Tiebreaking                   | Description                       |
+| ［criterion_1, criterion_2 ］ | (Break ties in dictionary order)  |
+|-------------------------------+-----------------------------------|
+|                               | same f_{min} → select smallest h |
+| ［h, FIFO］                   | same h → break ties in FIFO      |
+|                               | *default setting of FD*           |
+| ［h, LIFO］                   |                                   |
+|-------------------------------+-----------------------------------|
+
+#+BEGIN_RESUME
+To investigate various tiebreaking strategy, we use the following notations
+where several tiebreaking criterions are surrounded by brackets.
+
+Each criterion is applied in a dictionary order.
+For example, [h,fifo] means that,
+if multiple nodes have the same f value, it selects the smallest h.
+If even h are the same, it breaks ties according to FIFO.
+
+We tested these strategies on IPC instances.
+#+END_RESUME
 
 * Results (on 1104 IPC instances,  LMcut, 30min, 2GB)
 
@@ -137,69 +228,32 @@ x: # of all nodes in f(s)≦f*
 | ［criterion_1, criterion_2 ］ | (Break ties in dictionary order) |
 |-------------------------------+----------------------------------|
 |                               |                                  |
-| ［h, FIFO］                   | 558                              |
+| ［h, *FIFO* ］                | 558                              |
 |                               |                                  |
-| ［h, LIFO］                   | 565                              |
-| ［FIFO］                      | 442                              |
-| /［LIFO］/                    | /556/                            |
+| ［h, *LIFO* ］                | *565*                            |
 |-------------------------------+----------------------------------|
 
 #+BEGIN_ALIGNRIGHT
 #+BEGIN_LARGER
-
-
-
-*Simple LIFO is comparable to ［h, FIFO ］*
-
-*and not so bad from ［h, LIFO ］*
-
-*Tiebreaking with h is a rule-of-* [[png:static/0474]] , *but not a must*
-
-　
+*［h, LIFO ］ dominates ［h, FIFO ］*
 #+END_LARGER
 #+END_ALIGNRIGHT
 
-* The reason behind: the Effect of h-based tiebreaking
-
-#+BEGIN_CONTAINER-FLUID
-#+BEGIN_ROW-FLUID
-#+BEGIN_SPAN6
-*y* -- # of nodes in f(s)=f* and *h(s)=0*
-
-#+BEGIN_ALIGNRIGHT
-(final plateau)
-#+END_ALIGNRIGHT
-
-*x* -- # of nodes in f(s)≦f*
-
-#+BEGIN_LARGER
-#+BEGIN_CENTER
-
-*Openstacks* & *Cybersec*
-
-$h$-based tiebreaking does not reduce the size of the plateau.
-
-i.e.
-
-Almost all nodes are in the /final plateau/.
-
-#+END_CENTER
-#+END_LARGER
-#+END_SPAN6
-#+BEGIN_SPAN6
-[[png:with-h-nokey]]
-#+END_SPAN6
-#+END_ROW-FLUID
-#+END_CONTAINER-FLUID
+#+BEGIN_RESUME
+The result showed that ［h, LIFO ］ dominates ［h, FIFO ］.  This is a
+surprising result, considering that only the second-level tiebreaking
+difference caused such a difference.
+#+END_RESUME
 
 * Performance difference between [h,FIFO] and [h,LIFO] (re: evaluation)
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
 #+BEGIN_SPAN6
-*y* -- # of nodes expanded by [h,LIFO]
 
 *x* -- # of nodes expanded by [h,FIFO]
+
+*y* -- # of nodes expanded by [h,LIFO]
 
 #+BEGIN_LARGER
 #+BEGIN_CENTER
@@ -218,6 +272,15 @@ The difference happens only in
 #+END_ROW-FLUID
 #+END_CONTAINER-FLUID
 
+#+BEGIN_RESUME
+what is the reason behind this?  From the domain-wise investigation, we
+found that this is caused mainly by the Cybersec and Openstacks domains.
+
+We plotted the number of evaluations by each strategy in x-y plot. As we
+see, their difference is small in most domains except Openstacks
+and Cybersec.
+#+END_RESUME
+
 * Why Openstacks & Cybersec?
 
 + Many *zero-cost actions*.
@@ -235,50 +298,127 @@ The difference happens only in
     
     Assign 0 to all action costs *except drive-truck*.
 
-* Zero-cost domains
+#+BEGIN_RESUME
+These domains are characteristic by its large number of zero-cost actions.
 
-+ Modified IPC optimal track domains
-+ Assign cost 0 to all actions except one
-+ Following some *practically meaningful key resource*.
-  + =wood= resource in Woodworking
-  + =fuel= in Driverlog / other transportation domains
-  + =up= action in Elevator -- =down= does not consume energy
-  + etc..
-+ 1104 IPC instances → 620 zerocost instances (28 domains) 
+Addressing the problem caused by zero-cost actions is important because it
+frequently appears in practial application domains.
+
+First of all, both of these domains originates from industrial applications.
+Openstacks originates from Operations Resarch.
+Regarding Cybersec, I hope the listeners remember the great talk by jorg hoffman in the last ICAPS.
+
+Another interesting example is a realistic driverlog domain with fuel optimization.
+In such as setting, the domain will assign 0 to all action costs except drive-truck.
+#+END_RESUME
+
+* The reason behind: the Effect of h-based tiebreaking
+
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN6
+*x* -- # of nodes in f(s)≦f*
+
+*y* -- # of nodes in f(s)=f* and *h(s)=0*
+
+#+BEGIN_ALIGNRIGHT
+(final plateau)
+#+END_ALIGNRIGHT
+#+BEGIN_LARGER
+#+BEGIN_CENTER
+
+*Openstacks* & *Cybersec*
+
+/h/-based tiebreaking does not reduce the size of the plateau.
+
+i.e.
+
+Difference of LIFO and FIFO caused the difference!
+
+#+END_CENTER
+#+END_LARGER
+#+END_SPAN6
+#+BEGIN_SPAN6
+[[png:with-h-nokey]]
+#+END_SPAN6
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
+
+#+BEGIN_RESUME
+These domains are unfriendly to h-based tiebreaking. This is a plot of the final plateau, with differnt definition.
+This time, not only f is equal to f*, but also h should be equal to 0.
+
+In openstacs and cybersec, almost all nodes are on the x-y line.
+In other words, at almsot all search nodes, h=0.
+In these domains, h-tiebreaking has almost no effect, and the LIFO and FIFO plays the primary role. 
+#+END_RESUME
 
 * Understanding the Final Plateau
 
 [[png:final-plateau]]
 
+#+BEGIN_RESUME
+We want to further improve the performance in such zero-cost domains.
+For this purpose, we should understand what's happening in the final plateau.
+
+Firstly, in most domains, including positive-cost domains, most nodes are in f=f*.
+Without proper tiebreaking strategy, the planner has no guidance,
+because any heuristic estimates are the same within this region.
+#+END_RESUME
+
 * cont.
 
 [[png:final-plateau2]]
+
+#+BEGIN_RESUME
+In positive-cost domains, the h-based tiebreaking is useful because it provides a gradient toward the goal.
+#+END_RESUME
 
 * cont.
 
 [[png:final-plateau3]]
 
-* Depth-based Tiebreaking
+#+BEGIN_RESUME
+However, in zero-cost domains, almost all h values are 0, and h-based tiebreaking is useless.
+The problem is, how can we give a useful guidance in such a region?
+#+END_RESUME
 
-To solve these zero-cost instances efficiently ---
+* Depth-based Tiebreaking
 
 [[png:final-plateau4]]
 
-* Which depth to search?
+#+BEGIN_RESUME
+Here, we propose a depth-based tiebreaking.
 
-Within Final Plateau (f,h)=(f*,h*),
-*all solutions are optimal solutions*, independent from depth.
+Depth characterises a number of steps from the entrance of the plateau.
 
-Thus, there is *no preference* wrto depth.
+If the parent of a node have the different f and h value, then the child is
+a plateau entrance, and its depth is 0.
 
+If the parent of a node have the same f and h value, then the child has a depth larger by one.
+#+END_RESUME
+
+* How to use Depth?
+
+Within Final Plateau (f,h)=(f*,0), *all solutions are cost optimal* 
+#+BEGIN_ALIGNRIGHT
+because *all edge costs are 0.*
+#+END_ALIGNRIGHT
+
+[[png:final-plateau4-2]]
+
+#+BEGIN_ALIGNRIGHT
 #+BEGIN_LARGER
-#+BEGIN_CENTER
-*Focusing on any particular depth*
-
-*could result in pathological behavior.*
-
-#+END_CENTER
++ *Depth bias is not a good idea.*
 #+END_LARGER
+#+END_ALIGNRIGHT
+
+#+BEGIN_RESUME
+The next problem is how to use the depth.  In designing such a strategy, we
+should note that within final plateau, any solutions are cost optimal
+because all edge costs are 0.
+In this context, introducing a bias in each depth is not a good idea.
+#+END_RESUME
 
 ** Example: selecting the smallest depth?
 
@@ -286,17 +426,64 @@ Thus, there is *no preference* wrto depth.
 
 [[png:final-plateau5]]
 
+#+BEGIN_RESUME
+For example, what happens if we always prefer the smallest depth?
+We call such a stratefy First Depth.
+FirstDepth behaves like a breadth-first search and FIFO tiebreaking, which did not perform well.
+
+FirstDepth tends to search the neighborhood of plateau entrance exhaustively,
+and takes too much time to reach the appropriate depth.
+#+END_RESUME
+
 ** Example: selecting the largest depth?
 
 /LastDepth/ tiebreaking strategy :  ［ h, /ld/ ］
 
 [[png:final-plateau6]]
 
+#+BEGIN_RESUME
+The opposite scheme, LastDepth, also have a problem.  Last depth, which
+always selects the largest depth, is in certain condition equivalent to
+depth-first LIFO tiebreaking.
+It may quickly pass and miss the important depth.
+#+END_RESUME
+
 * Random Depth Tiebreaking
 
-/RandomDepth/ tiebreaking strategy :  ［ h, /rd/ ］
+/RandomDepth/ tiebreaking strategy :  ［ h, /rd/, X ］
+
+Select a depth /d/ at random.
+
+In a depth bucket of /d/, select a node using the 3rd tiebreaking policy X.
+
+X could be FIFO, LIFO or RO (Random Order), but we use RO.
+
+#+BEGIN_RESUME
+Finally, we propose RandomDepth tiebreaking which removes the depth bias.
+Actual implementation of RandomDepth is as follows.
+
+When h-tiebreaking fails, RandomDepth selects a certain depth at random.
+
+Next, In a depth bucket of /d/, we select one node using the third tiebreaking policy X.
+
+X could be FIFO, LIFO or Random Order, but we use Random Order.
+
+#+END_RESUME
+
+* Random Depth Tiebreaking
+
+/RandomDepth/ tiebreaking strategy :  ［ h, /rd/, RO ］
 
 [[png:final-plateau7]]
+
+#+BEGIN_ALIGNRIGHT
+Relations to Rapidly exploring Random Tree (RRT) ?
+#+END_ALIGNRIGHT
+
+#+BEGIN_RESUME
+RandomDepth Tiebreaking search the final plateau uniformly and sparsely.
+This is an interesting aspect similar to Rapidly exploring Random Tree.
+#+END_RESUME
 
 # * Random Depth Tiebreaking + random selection within depth
 # 
@@ -306,32 +493,62 @@ Thus, there is *no preference* wrto depth.
 # 
 # [[png:final-plateau7]]
 
+* Experimental Evaluation : Zero-cost domains
 
-* Experimental Results (Fast Downward, 30min, 2GB)
++ Modified IPC optimal track domains
++ Assign cost 0 to all actions except one
++ Positive cost action represents a *realistic key resource*.
+  + Consume =wood= in Woodworking
+  + Consume =fuel= in Driverlog / other transportation domains
+  + =up= action in Elevator -- =down= does not consume electricity
+  + etc..
++ 1104 IPC instances → 620 zerocost instances (28 domains) 
+
+#+BEGIN_RESUME
+Finally, the experimental evaluation.  Along with the original IPC
+instances, we introduce Zero-cost domains, which are the instances we
+assigned cost 0 to all actiosn except one.
+
+The one which has a positive cost represents a realistic key resource,
+such as wood, fuel or electricity.
+
+We created 620 zerocost instances consisting of 28 domains.
+#+END_RESUME
+
+* Results (Fast Downward, 30min, 2GB)
 
 # [[png:static/results]]
 
 
-|                         | <c>                 | <c>              |
-| Domain Set              | ［h, fifo］         | ［h, rd, ro］    |
-|                         | Default tiebreaking | Proposed         |
-|                         | in Fast Downward    | Method           |
-|-------------------------+---------------------+------------------|
-| LMcut                   |                     |                  |
-| IPC Instances (1104)    | 558                 | *572.8* (+ 14.8) |
-| Zerocost Instances(680) | 256                 | *294.2* (+ 38.2) |
-| Sum(1724)               | 814                 | *867.0* (+ 53.0) |
-|-------------------------+---------------------+------------------|
-| M&S                     |                     |                  |
-| IPC Instances (1104)    | 479                 | *484.0* (+ 5.0)  |
-| Zerocost Instances(680) | 276                 | *310.2* (+ 34.2) |
-| Sum(1724)               | 755                 | *794.2* (+ 39.2) |
-|-------------------------+---------------------+------------------|
+|                         | <c>          | <c>         | <c>              |
+| Domain Set              | ［h, FIFO］  | ［h, LIFO］ | ［h, RD, RO］    |
+|                         | (FD Default) |             | (Proposed)       |
+|-------------------------+--------------+-------------+------------------|
+| LMcut                   |              |             |                  |
+| IPC Instances (1104)    | 558          | 565         | *572.8* (+ 14.8) |
+| Zerocost Instances(680) | 256          | 279         | *294.2* (+ 38.2) |
+| Sum(1724)               | 814          | 844         | *867.0* (+ 53.0) |
+|-------------------------+--------------+-------------+------------------|
+| M&S                     |              |             |                  |
+| IPC Instances (1104)    | 479          | *488*       | 484.0 (+ 5.0)    |
+| Zerocost Instances(680) | 276          | 290         | *310.2* (+ 34.2) |
+| Sum(1724)               | 755          | 778         | *794.2* (+ 39.2) |
+|-------------------------+--------------+-------------+------------------|
 
+#+BEGIN_RESUME
+This is the result. We used both LMcut and M&S, and achieved a significant improvement.
+#+END_RESUME
 
 * Depth Distribution
 
 [[png:depth-distribution]]
+
+#+BEGIN_RESUME
+We also plotted the number of nodes in each depth. As you can see, both
+FIFO and LIFO are too biased toward shallower or deeper regions.
+
+In contrast RandomDepth draws a beautiful curve, showing that it expands each depth in almost the same speed.
+#+END_RESUME
 
 * Conclusion
 
