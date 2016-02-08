@@ -471,31 +471,8 @@ depth-first LIFO tiebreaking.
 It may quickly pass and miss the important depth.
 #+END_RESUME
 
-* Random Depth Tiebreaking
-
-/RandomDepth/ tiebreaking strategy :  ［ h, /rd/, X ］
-
-Select a depth /d/ at random.
-
-In a depth bucket of /d/, select a node using the 3rd tiebreaking policy X.
-
-X could be FIFO, LIFO or RO (Random Order), but we use RO.
-
-#+BEGIN_RESUME
-Finally, we propose RandomDepth tiebreaking which removes the depth bias.
-Actual implementation of RandomDepth is as follows.
-
-When h-tiebreaking fails, RandomDepth selects a certain depth at random.
-
-Next, In a depth bucket of /d/, we select one node using the third tiebreaking policy X.
-
-X could be FIFO, LIFO or Random Order, but we use Random Order.
-
-#+END_RESUME
 
 * Random Depth Tiebreaking
-
-/RandomDepth/ tiebreaking strategy :  ［ h, /rd/, RO ］
 
 [[png:final-plateau7]]
 
@@ -504,7 +481,14 @@ Relations to Rapidly exploring Random Tree (RRT) ?
 #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
-RandomDepth Tiebreaking search the final plateau uniformly and sparsely.
+Finally, we propose RandomDepth tiebreaking which removes the depth bias.
+Actual implementation of RandomDepth is as follows.
+
+When h-tiebreaking fails, RandomDepth selects a random depth.
+
+Then a Random Order selects one node at random.
+
+RandomDepth Tiebreaking can search the final plateau uniformly and sparsely.
 This is an interesting aspect similar to Rapidly exploring Random Tree.
 #+END_RESUME
 

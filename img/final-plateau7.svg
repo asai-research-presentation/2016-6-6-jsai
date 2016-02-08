@@ -10,7 +10,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="816.4978"
-   height="505.23376"
+   height="528.57159"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
@@ -244,7 +244,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.1997695"
      inkscape:cx="534.3295"
-     inkscape:cy="269.95303"
+     inkscape:cy="396.64403"
      inkscape:document-units="in"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -268,7 +268,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -277,7 +277,7 @@
      id="layer3"
      inkscape:label="Layer#1"
      style="display:inline"
-     transform="translate(41.868474,-164.11392)">
+     transform="translate(41.868474,-140.77611)">
     <text
        xml:space="preserve"
        style="font-size:18.15288353px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.81528819;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman, Italic'"
@@ -1373,35 +1373,61 @@
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.16999996;marker:none;marker-end:url(#Arrow1Send);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect11200"
        width="783.8606"
-       height="145.07872"
+       height="168.41653"
        x="-26.890127"
-       y="165.78117" />
+       y="142.44336" />
     <text
        xml:space="preserve"
-       style="font-size:32px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff5555;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.16999996;marker:none;marker-end:url(#Arrow1Send);visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold Italic"
+       style="font-size:32px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:120.00000477%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff5555;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.16999996;marker:none;marker-end:url(#Arrow1Send);visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold Italic"
        x="-18.320705"
-       y="202.57961"
+       y="174.57961"
        id="text8991"
+       sodipodi:linespacing="120%"><tspan
+         sodipodi:role="line"
+         x="-18.320705"
+         y="174.57961"
+         id="tspan8995">The best practice: [h, RD, RO]</tspan><tspan
+         sodipodi:role="line"
+         x="-18.320705"
+         y="212.97961"
+         id="tspan10471">  Select a depth      randomly (Random Depth)</tspan><tspan
+         sodipodi:role="line"
+         x="-18.320705"
+         y="251.37961"
+         id="tspan9490">  Select a node from      randomly (Random Order)</tspan><tspan
+         sodipodi:role="line"
+         x="-18.320705"
+         y="294.56934"
+         id="tspan10473">    → Search the final plateau uniformly &amp; sparsely  </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:56px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Roman No9 L;-inkscape-font-specification:Nimbus Roman No9 L Bold Italic"
+       x="233.51544"
+       y="222.09473"
+       id="text9508"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="-18.320705"
-         y="202.57961"
-         id="tspan8995">The best practice:</tspan><tspan
+         id="tspan9510"
+         x="233.51544"
+         y="222.09473">d</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:56px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Roman No9 L;-inkscape-font-specification:Nimbus Roman No9 L Bold Italic"
+       x="303.47726"
+       y="259.63959"
+       id="text9508-7"
+       sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="-18.320705"
-         y="242.57961"
-         id="tspan10471">  Selecting a depth randomly (Random Depth)</tspan><tspan
-         sodipodi:role="line"
-         x="-18.320705"
-         y="287.56891"
-         id="tspan10473">    → Search the final plateau uniformly &amp; sparsely  </tspan></text>
+         id="tspan9510-1"
+         x="303.47726"
+         y="259.63959">d</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer"
      style="display:inline"
-     transform="translate(41.868474,-164.11392)">
+     transform="translate(41.868474,-140.77611)">
     <g
        transform="matrix(0.64831724,0,0,0.64831724,87.71952,301.56918)"
        id="g9563" />
