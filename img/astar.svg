@@ -144,7 +144,7 @@
      inkscape:cx="441.58867"
      inkscape:cy="274.38505"
      inkscape:document-units="in"
-     inkscape:current-layer="g8497"
+     inkscape:current-layer="layer2"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -17951,38 +17951,38 @@
       <text
          xml:space="preserve"
          style="font-size:22px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:113.99999857%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
-         x="261.48999"
-         y="378.97824"
+         x="285.48999"
+         y="340.97824"
          id="text7383"
          sodipodi:linespacing="114%"><tspan
            sodipodi:role="line"
            id="tspan7385"
-           x="261.48999"
-           y="378.97824">i.e. 0≦h(s)≦h*(s)</tspan></text>
+           x="285.48999"
+           y="340.97824">i.e. 0≦h≦h*</tspan></text>
       <text
          sodipodi:linespacing="114%"
          id="text8924-4"
-         y="311.52969"
+         y="307.52969"
          x="26.538418"
          style="font-size:31.11922836px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:113.99999857%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
          xml:space="preserve"><tspan
-           y="311.52969"
-           x="26.538418"
-           sodipodi:role="line"
-           id="tspan7320">f(s) = g(s) + h(s) ≦ f*</tspan><tspan
-           y="347.00562"
+           y="307.52969"
            x="26.538418"
            sodipodi:role="line"
            id="tspan7322">  g: cost from start node</tspan><tspan
-           y="382.48154"
+           y="343.00562"
            x="26.538418"
            sodipodi:role="line"
            id="tspan8777">  h: admissible</tspan><tspan
-           y="417.95746"
+           y="382.68924"
            x="26.538418"
            sodipodi:role="line"
-           id="tspan9503">f* = (unknown) optimal cost</tspan><tspan
-           y="453.43338"
+           id="tspan9503">f = g + h ≦ f*</tspan><tspan
+           y="418.16516"
+           x="26.538418"
+           sodipodi:role="line"
+           id="tspan4830">  f*: (unknown) optimal cost</tspan><tspan
+           y="453.64108"
            x="26.538418"
            sodipodi:role="line"
            id="tspan9505" /></text>
@@ -18156,26 +18156,30 @@
          ry="6.8492451"
          rx="5.29532"
          y="443.04797"
-         x="-20.383734"
-         height="89.19371"
-         width="461.68988"
+         x="4.3288193"
+         height="89.193726"
+         width="449.73221"
          id="rect12256-8"
          style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.42778575;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
       <text
          xml:space="preserve"
-         style="font-size:31.11922836px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.39980268;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
-         x="435.50653"
+         style="font-size:31.11922836px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.39980268;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+         x="20.003826"
          y="476.42099"
          id="text6935"
          sodipodi:linespacing="125%"><tspan
            sodipodi:role="line"
            id="tspan6937"
-           x="435.50653"
-           y="476.42099">Search all nodes with f(s) ≦ f*</tspan><tspan
+           x="20.003826"
+           y="476.42099">To prove optimality, A*</tspan><tspan
            sodipodi:role="line"
-           x="435.50656"
-           y="515.32001"
-           id="tspan6939">to prove optimality</tspan></text>
+           x="20.003826"
+           y="519.93372"
+           id="tspan4850">expands all nodes with f ≦ f*</tspan><tspan
+           sodipodi:role="line"
+           x="20.003826"
+           y="563.44647"
+           id="tspan6939" /></text>
     </g>
   </g>
 </svg>
