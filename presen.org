@@ -312,7 +312,7 @@ Another interesting example is a realistic driverlog domain with fuel optimizati
 In such as setting, the domain will assign 0 to all action costs except drive-truck.
 #+END_RESUME
 
-* The reason behind: the Effect of h-based tiebreaking
+* The Unfriendly Effect on h-based Tiebreaking
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
@@ -327,13 +327,13 @@ In such as setting, the domain will assign 0 to all action costs except drive-tr
 #+BEGIN_LARGER
 #+BEGIN_CENTER
 
-*Openstacks* & *Cybersec*
+On *Openstacks* & *Cybersec*,
 
-/h/-based tiebreaking does not reduce the size of the plateau.
+/h/-tiebreaking has no effect,
 
 i.e.
 
-Difference of LIFO and FIFO caused the difference!
+the search is controlled entirely by LIFO and FIFO !
 
 #+END_CENTER
 #+END_LARGER
