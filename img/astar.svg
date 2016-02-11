@@ -140,11 +140,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.2544232"
-     inkscape:cx="441.58867"
+     inkscape:zoom="1.7740223"
+     inkscape:cx="603.29065"
      inkscape:cy="274.38505"
      inkscape:document-units="in"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="g12258-0-3"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -152,10 +152,10 @@
      fit-margin-bottom="0"
      inkscape:snap-center="true"
      inkscape:snap-global="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="818"
-     inkscape:window-x="768"
-     inkscape:window-y="25"
+     inkscape:window-width="1024"
+     inkscape:window-height="713"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      units="in" />
   <metadata
@@ -17950,42 +17950,57 @@
            id="tspan6929">A* Search:</tspan></text>
       <text
          xml:space="preserve"
-         style="font-size:22px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:113.99999857%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
-         x="285.48999"
-         y="340.97824"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:113.99999857%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+         x="380.74585"
+         y="321.04874"
          id="text7383"
          sodipodi:linespacing="114%"><tspan
            sodipodi:role="line"
            id="tspan7385"
-           x="285.48999"
-           y="340.97824">i.e. 0≦h≦h*</tspan></text>
+           x="380.74585"
+           y="321.04874">i.e. </tspan><tspan
+           sodipodi:role="line"
+           x="380.74585"
+           y="346.55298"
+           id="tspan11348">0≦h≦h*</tspan></text>
       <text
          sodipodi:linespacing="114%"
          id="text8924-4"
          y="307.52969"
-         x="26.538418"
+         x="16.538418"
          style="font-size:31.11922836px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:113.99999857%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
          xml:space="preserve"><tspan
            y="307.52969"
-           x="26.538418"
+           x="16.538418"
            sodipodi:role="line"
-           id="tspan7322">  g: cost from start node</tspan><tspan
+           id="tspan7322">g: cost from start node</tspan><tspan
            y="343.00562"
-           x="26.538418"
+           x="16.538418"
            sodipodi:role="line"
-           id="tspan8777">  h: admissible</tspan><tspan
+           id="tspan8777">h: admissible heuristics</tspan><tspan
            y="382.68924"
-           x="26.538418"
+           x="16.538418"
            sodipodi:role="line"
-           id="tspan9503">f = g + h ≦ f*</tspan><tspan
+           id="tspan4830">f = g + h ≦ f* (optimal cost)</tspan><tspan
            y="418.16516"
-           x="26.538418"
+           x="16.538418"
            sodipodi:role="line"
-           id="tspan4830">  f*: (unknown) optimal cost</tspan><tspan
+           id="tspan11346">OPEN: Prio. Queue</tspan><tspan
            y="453.64108"
-           x="26.538418"
+           x="16.538418"
            sodipodi:role="line"
            id="tspan9505" /></text>
+      <text
+         xml:space="preserve"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:113.99999857%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+         x="315.9599"
+         y="412.64667"
+         id="text11350"
+         sodipodi:linespacing="114%"><tspan
+           sodipodi:role="line"
+           id="tspan11352"
+           x="315.9599"
+           y="412.64667">(sorted by f)</tspan></text>
     </g>
     <g
        id="g10759">
@@ -18084,23 +18099,23 @@
         <rect
            style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.20229483;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            id="rect12256-8-6"
-           width="62.574341"
-           height="63.754185"
-           x="-634.17096"
-           y="-118.07927"
+           width="132.13173"
+           height="65.493118"
+           x="-699.38104"
+           y="-145.90224"
            rx="8.1677914"
            ry="10.564651" />
         <text
            xml:space="preserve"
            style="font-size:48px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
-           x="-616.45905"
-           y="-68.580765"
+           x="-681.66913"
+           y="-96.403725"
            id="text8924-4-9"
            sodipodi:linespacing="125%"><tspan
              id="tspan16300-1-6"
              sodipodi:role="line"
-             x="-616.45905"
-             y="-68.580765">f*</tspan></text>
+             x="-681.66913"
+             y="-96.403725">f = f*</tspan></text>
       </g>
     </g>
     <g

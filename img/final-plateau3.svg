@@ -299,9 +299,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.88701117"
+     inkscape:zoom="1.2544232"
      inkscape:cx="444.0581"
-     inkscape:cy="218.99196"
+     inkscape:cy="264.08722"
      inkscape:document-units="in"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -311,10 +311,10 @@
      fit-margin-bottom="0"
      inkscape:snap-center="true"
      inkscape:snap-global="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="818"
-     inkscape:window-x="768"
-     inkscape:window-y="25"
+     inkscape:window-width="1024"
+     inkscape:window-height="713"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      units="in" />
   <metadata
@@ -388,49 +388,6 @@
        d="m 629.32501,193.60768 c 0,67.07979 -54.37891,121.45871 -121.45871,121.45871 -67.07979,0 -121.45871,-54.37892 -121.45871,-121.45871 0,-67.07979 54.37892,-121.458708 121.45871,-121.458708 67.0798,0 121.45871,54.378918 121.45871,121.458708 z"
        transform="matrix(2.6305225,0,0,0.98100222,-990.23734,292.18185)" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:5.02043629;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Mend);display:inline"
-       d="M 171.98189,480.18686 281.28547,438.28152"
-       id="path15908-7"
-       inkscape:connector-curvature="0"
-       inkscape:transform-center-x="-72.334599"
-       inkscape:transform-center-y="-87.825483"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:5.02043629;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Mend);display:inline"
-       d="M 171.24668,485.77144 332.34245,533.0278"
-       id="path15908-7-6"
-       inkscape:connector-curvature="0"
-       inkscape:transform-center-x="-66.111354"
-       inkscape:transform-center-y="92.600767"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:5.02043629;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Send);display:inline"
-       d="M 167.69667,479.62267 156.74579,457.5496"
-       id="path15908-7-2"
-       inkscape:connector-curvature="0"
-       inkscape:transform-center-x="66.111353"
-       inkscape:transform-center-y="-92.600775"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:5.02043629;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Send);display:inline"
-       d="m 166.96145,485.20727 -10.54417,20.34194"
-       id="path15908-7-2-4"
-       inkscape:connector-curvature="0"
-       inkscape:transform-center-x="72.334612"
-       inkscape:transform-center-y="87.825497"
-       sodipodi:nodetypes="cc" />
-    <text
-       xml:space="preserve"
-       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:76.31999969;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
-       x="473.38162"
-       y="460.50562"
-       id="text5765"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan5767"
-         x="473.38162"
-         y="460.50562">CLOSED nodes</tspan></text>
-    <path
        sodipodi:type="arc"
        style="opacity:0.89830508;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:4.32000017;stroke-miterlimit:4;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="path5769"
@@ -456,7 +413,7 @@
          sodipodi:role="line"
          id="tspan5763"
          x="-25.979874"
-         y="283.67892">But when almost all edges are 0-cost, there is no guidance</tspan></text>
+         y="283.67892">h-based tiebreaking fails to provide guidance</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:72px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;opacity:0.89830507999999998;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:10.17000007999999944;marker:none;marker-end:url(#Arrow1Send);visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
@@ -608,23 +565,37 @@
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.89999998;stroke-miterlimit:4;stroke-dasharray:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect8072"
-       width="709.12305"
-       height="58.62384"
-       x="14.500609"
-       y="673.85724"
+       width="438.55154"
+       height="94.700081"
+       x="292.96384"
+       y="635.52625"
        rx="8.1677914"
        ry="10.564651" />
     <text
        xml:space="preserve"
-       style="font-size:36px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.02043629;marker:none;marker-end:url(#Arrow1Send);visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
-       x="370.53751"
-       y="714.80603"
+       style="font-size:36px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:121.00000381%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.02043629;marker:none;marker-end:url(#Arrow1Send);visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="723.85956"
+       y="671.85718"
        id="text8055"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="121%"><tspan
          sodipodi:role="line"
          id="tspan8057"
-         x="370.53751"
-         y="714.80603">How to give a guidance in this region?</tspan></text>
+         x="723.85956"
+         y="671.85718">How to guide the search</tspan><tspan
+         sodipodi:role="line"
+         x="723.85956"
+         y="715.41718"
+         id="tspan3390"> in this region?</tspan></text>
+    <path
+       sodipodi:type="arc"
+       style="color:#000000;fill:#f44800;fill-opacity:0.20093456;fill-rule:nonzero;stroke:#f44800;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path4273"
+       sodipodi:cx="-16.847458"
+       sodipodi:cy="342.74048"
+       sodipodi:rx="128.46185"
+       sodipodi:ry="44.751057"
+       d="m 111.6144,342.74048 a 128.46185,44.751057 0 1 1 -256.92371,0 128.46185,44.751057 0 1 1 256.92371,0 z"
+       transform="matrix(0.31971209,-0.31971209,0.31971209,0.31971209,-23.175831,496.20927)" />
   </g>
   <g
      inkscape:groupmode="layer"

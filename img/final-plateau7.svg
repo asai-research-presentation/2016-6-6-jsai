@@ -243,8 +243,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.1997695"
-     inkscape:cx="534.3295"
-     inkscape:cy="396.64403"
+     inkscape:cx="334.29108"
+     inkscape:cy="263.28508"
      inkscape:document-units="in"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -254,10 +254,10 @@
      fit-margin-bottom="0"
      inkscape:snap-center="true"
      inkscape:snap-global="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="818"
-     inkscape:window-x="768"
-     inkscape:window-y="25"
+     inkscape:window-width="1024"
+     inkscape:window-height="713"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      units="in" />
   <metadata
@@ -1386,7 +1386,7 @@
          sodipodi:role="line"
          x="-18.320705"
          y="174.57961"
-         id="tspan8995">The best practice: [h, RD, RO]</tspan><tspan
+         id="tspan8995">Our best proposed method: [h, RD, RO]</tspan><tspan
          sodipodi:role="line"
          x="-18.320705"
          y="212.97961"

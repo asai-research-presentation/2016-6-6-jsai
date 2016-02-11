@@ -10,7 +10,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="830.93451"
-   height="500.09607"
+   height="454.48007"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
@@ -242,9 +242,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1937706"
+     inkscape:zoom="0.84412329"
      inkscape:cx="415.46725"
-     inkscape:cy="243.34657"
+     inkscape:cy="377.37567"
      inkscape:document-units="in"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -254,10 +254,10 @@
      fit-margin-bottom="0"
      inkscape:snap-center="true"
      inkscape:snap-global="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="818"
-     inkscape:window-x="768"
-     inkscape:window-y="25"
+     inkscape:window-width="1024"
+     inkscape:window-height="713"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      units="in" />
   <metadata
@@ -277,7 +277,7 @@
      id="layer3"
      inkscape:label="Layer#1"
      style="display:inline"
-     transform="translate(41.868474,-169.25161)">
+     transform="translate(41.868474,-214.86761)">
     <path
        transform="matrix(1.7930131,0,0,1.7930131,-39.930442,225.19393)"
        sodipodi:type="arc"
@@ -436,21 +436,17 @@
     <text
        xml:space="preserve"
        style="font-size:32px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ff5555;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.16999996;marker:none;marker-end:url(#Arrow1Send);visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold Italic"
-       x="-18.320705"
-       y="192.57961"
+       x="-32.320705"
+       y="238.57961"
        id="text8991"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan8993"
-         x="-18.320705"
-         y="192.57961">Focusing on the smallest depth</tspan><tspan
+         x="-32.320705"
+         y="238.57961"
+         id="tspan9363">FIFO/breadth-first behavior</tspan><tspan
          sodipodi:role="line"
-         x="-18.320705"
-         y="232.57961"
-         id="tspan9363">  (i.e. FIFO/breadth-first behavior)</tspan><tspan
-         sodipodi:role="line"
-         x="-18.320705"
-         y="277.56891"
+         x="-32.320705"
+         y="283.56891"
          id="tspan8995">→ wastes too much time in the shallow depth</tspan></text>
     <path
        sodipodi:type="arc"
@@ -1012,7 +1008,7 @@
      id="layer2"
      inkscape:label="Layer"
      style="display:inline"
-     transform="translate(41.868474,-169.25161)">
+     transform="translate(41.868474,-214.86761)">
     <g
        transform="matrix(0.64831724,0,0,0.64831724,87.71952,301.56918)"
        id="g9563" />
