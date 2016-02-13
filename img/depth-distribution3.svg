@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -276,16 +276,27 @@
   <text
      xml:space="preserve"
      style="font-size:28px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.16999996;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
-     x="736.1051"
-     y="106.52502"
+     x="756.1051"
+     y="108.52502"
      id="text3279"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan3281"
-       x="736.1051"
-       y="106.52502">less biased</tspan><tspan
+       x="756.1051"
+       y="108.52502">Rectangular,</tspan><tspan
        sodipodi:role="line"
-       x="736.1051"
-       y="141.52502"
-       id="tspan3306">distribution</tspan></text>
+       x="756.1051"
+       y="143.52502"
+       id="tspan4518">ideal distribution</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#980101;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.16999996;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+     x="632.61865"
+     y="174.71146"
+     id="text4524"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan4526"
+       x="632.61865"
+       y="174.71146">(also in other domains)</tspan></text>
 </svg>
