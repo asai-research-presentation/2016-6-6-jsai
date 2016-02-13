@@ -32,10 +32,12 @@ Number of Solved Instances
 |                         | Default          | Proposed |
 | Domain Set              | in Fast Downward |          |
 |-------------------------+------------------+----------|
-| IPC Instances (1104)    | 558              | *573*    |
+| IPC^1 Instances (1104)  | 558              | *573*    |
 | Zerocost Instances(680) | 256              | *294*    |
 | Sum (1724)              | 814              | *867*    |
 |-------------------------+------------------+----------|
+
+IPC^1 : International Planning Competition
 
 #+BEGIN_ALIGNRIGHT
 Solved *53 more instances!*
@@ -43,7 +45,7 @@ Solved *53 more instances!*
 
 #+BEGIN_RESUME
 Fast Forward, we improved the state of the art just by improving the
-tiebreaking behavior of A* on the standard benchmark instances.
+tiebreaking behavior of A^* on the standard benchmark instances.
 
 Let's see what's happening.
 #+END_RESUME
@@ -59,13 +61,13 @@ Let's see what's happening.
 #+BEGIN_SPAN5
 
 #+BEGIN_LARGER
-#+BEGIN_ALIGNRIGHT
+#+BEGIN_CENTER
 *Shortest path*
 
 from the *Initial Node*
 
 to the *Goal Node(s)*
-#+END_ALIGNRIGHT
+#+END_CENTER
 #+END_LARGER
 
 #+END_SPAN5
@@ -83,7 +85,7 @@ planning session.
 # 
 # [[png:dijkstra]]
 
-* Optimal Search with A*
+* Optimal Search with A* ...
 
 # Guaranteed to find an optimal solution when /heuristic function/ $h(s)$ is admissible
 
@@ -102,7 +104,7 @@ requirement, A* expands the nodes with the smallest f value each time.
 However, this description lacks one important aspect of A*.
 #+END_RESUME
 
-* Tiebreaking Strategy.
+* Optimal Search with A* ... w/o Tiebreaking Strategy.
 
 # Guaranteed to find an optimal solution when /heuristic function/ $h(s)$ is admissible
 
@@ -116,7 +118,7 @@ have the same f-minimum? In such cases, a tiebreaking strategy should select whi
 * Conventional Wisdom regarding Tiebreaking
 
 #+BEGIN_CENTER
-How to select from multiple nodes with the same f_{min}?
+How to select from multiple nodes with the same /f_{min}/?
 #+END_CENTER
 
 |                                  | Tiebreaking                                 |
@@ -157,24 +159,24 @@ Overall, it seems that the current rule-of-thumb is to use h-based tiebreaking.
 
 * [ /h/ ] is underspecified
 
-*What if there are still multiple nodes with the same /h/ ?*
+*What happens if there are still /multiple/ nodes with the same /h/ ?*
 
-→ There must be a *2nd Tiebreaking /X/* : [ /h/ , */X/* ]
+→ There must be a *2nd Tiebreaking /X/* : denoted as [ /h/ , */X/* ]
 
-Example -- A^* with *[ /h/ , /LIFO/ ]* : Selects the nodes with f_{min}. 
+Example -- A* with *[ /h/ , /LIFO/ ]* : Selects the nodes with /f_{min}/. 
 
-+ *IF* multiple nodes have f_{min} (1st tiebreaking), selects the nodes with h_{min}.
-+ *IF* multiple nodes have h_{min} (2nd tiebreaking), select the most recent node.
++ *IF* multiple nodes have /f_{min}/, selects the nodes with /h_{min}/  (1st tiebreaking).
++ *IF* multiple nodes have /h_{min}/, select the most recent node (2nd tiebreaking).
   #+BEGIN_ALIGNRIGHT
   #+BEGIN_SMALLER
   (i.e. popping a LIFO queue: always returns exactly 1 node)
   #+END_SMALLER
   #+END_ALIGNRIGHT
 
-|-------------------------+-------------------------------------------|
-| /2012 Burns et. al./    | [ /h/, LIFO (*undocumented*)]             |
-| (current) Fast Downward | [ /h/, FIFO (*undocumented*)]             |
-|-------------------------+-------------------------------------------|
+|-----------------------------------------------+-------------------------------|
+| Solver code on github by /2012 Burns et. al./ | [ /h/, LIFO (*undocumented*)] |
+| (current) Fast Downward                       | [ /h/, FIFO (*undocumented*)] |
+|-----------------------------------------------+-------------------------------|
 
 #+BEGIN_ALIGNRIGHT
 #+BEGIN_LARGER
@@ -210,7 +212,7 @@ In the standard benchmark sets,
 
 #+BEGIN_LARGER
 #+BEGIN_CENTER
-*Most nodes have f=f**.
+*Most nodes have f=f^**.
 #+END_CENTER
 
 #+BEGIN_ALIGNRIGHT
@@ -244,13 +246,13 @@ Thus, in this plateau,
 the search is controlled solely by the tiebreaking.
 #+END_RESUME
 
-* Testing 2nd Tiebreaking Really Matters
+* Testing if the 2nd Tiebreaking Really Matters
 
 | <c>                           | <c>                               | <c>       |
 | Tiebreaking                   | Description                       | Solved    |
 | ［criterion_1, criterion_2 ］ | (applied in left-to-right)        | Instances |
 |-------------------------------+-----------------------------------+-----------|
-| ［ /h/,  *LIFO* ］            | same f_{min} → select smallest h |           |
+| ［ /h/,  *LIFO* ］            | same /f_{min}/ → select smallest h |           |
 |                               | same h → break ties in LIFO      |           |
 |-------------------------------+-----------------------------------+-----------|
 | ［ /h/,  *FIFO* ］            | *default setting of FD*           |           |
@@ -280,7 +282,7 @@ If there are still multiple nodes have the same h value, it breaks ties accordin
 We tested these strategies on IPC instances.
 #+END_RESUME
 
-* Testing 2nd Tiebreaking Really Matters
+* Testing if the 2nd Tiebreaking Really Matters
 
 # Results (on 1104 IPC instances,  LMcut, 30min, 2GB)
 
@@ -288,7 +290,7 @@ We tested these strategies on IPC instances.
 | Tiebreaking                   | Description                       | Solved    |
 | ［criterion_1, criterion_2 ］ | (applied in left-to-right)        | Instances |
 |-------------------------------+-----------------------------------+-----------|
-| ［ /h/, *LIFO* ］             | same f_{min} → select smallest h | *565*     |
+| ［ /h/, *LIFO* ］             | same /f_{min}/ → select smallest h | *565*     |
 |                               | same h → break ties in LIFO      |           |
 |-------------------------------+-----------------------------------+-----------|
 | ［ /h/, *FIFO* ］             | *default setting of FD*           | 558       |
@@ -303,7 +305,7 @@ on 1104 IPC (International Planning Competition) instances
 *［h, LIFO ］ outperforms ［h, FIFO ］*
 #+END_LARGER
 
-the only difference is the 2nd tiebreaking
+the 2nd tiebreaking makes difference
 #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
@@ -312,7 +314,7 @@ surprising result, considering that only the 2nd tiebreaking
 difference caused such a difference.
 #+END_RESUME
 
-* TODO Comparing [h,FIFO] and [h,LIFO] Domain-wise
+* TODO Comparing [h,FIFO] and [h,LIFO] per Domain (Instance Set)
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
@@ -348,25 +350,32 @@ and Cybersec.
 
 * What makes /Openstacks/ & /Cybersec/ Different?
 
-+ Many *zero-cost actions*.
-+ Zero-cost actions are important
-+ because it appears in many *practical applications.*
-  + *Openstacks is an application domain.* (Fink and Voss, 1999)
-    #+BEGIN_ALIGNRIGHT
-    minimize the # of stacks, from Operations Research.
-    #+END_ALIGNRIGHT
-  + *Cybersec is also an application domain.* (Boddy et. al.)
-    #+BEGIN_ALIGNRIGHT
-    Behavioral Adversary Modeling System
-    
-    The great talk by Joerg Hoffmann in the last ICAPS!
-    #+END_ALIGNRIGHT
-  + Consider a *Realistic Driverslog domain w/ fuel minimization.*
-    #+BEGIN_ALIGNRIGHT
-    Assign 0 cost to all actions *except drive-truck*
+Many *zero-cost actions*.
 
-    which burns some fuel.
-    #+END_ALIGNRIGHT
+#+BEGIN_SMALLER
+　
+
+(Before proceeding, let me say...)
+#+END_SMALLER
+
+Zero-cost enables the modelling of many *practical applications.*
+
++ *Openstacks is an application domain.* (Fink and Voss, 1999)
+  #+BEGIN_ALIGNRIGHT
+  minimize the # of stacks, from Operations Research.
+  #+END_ALIGNRIGHT
++ *Cybersec is also an application domain.* (Boddy et. al.)
+  #+BEGIN_ALIGNRIGHT
+  Behavioral Adversary Modeling System
+  
+  The great talk by Joerg Hoffmann in the last ICAPS!
+  #+END_ALIGNRIGHT
++ Consider a *REALISTIC transportation domain w/ fuel minimization.*
+  #+BEGIN_ALIGNRIGHT
+  Assign 0 cost to all actions *except drive-truck*
+
+  which burns some fuel.
+  #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
 These domains are characteristic by its large number of zero-cost actions.
@@ -378,11 +387,11 @@ First of all, both of these domains originates from industrial applications.
 Openstacks originates from Operations Resarch.
 Regarding Cybersec, I hope the listeners remember the great talk by jorg hoffman in the last ICAPS.
 
-Another interesting example is a realistic driverlog domain with fuel optimization.
+Another interesting example is a realistic transportation domain with fuel optimization.
 In such as setting, the domain will assign 0 to all action costs except drive-truck.
 #+END_RESUME
 
-* TODO Zero-cost is difficult for /h/-based Tiebreaking
+* TODO Zero-cost actions makes /h/-Tiebreaking difficult
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
@@ -392,7 +401,7 @@ In such as setting, the domain will assign 0 to all action costs except drive-tr
 #+BEGIN_SPAN6
 
 #+BEGIN_CENTER
-← A stricter subset of final plateau with *f=f**, *h=0*
+← A stricter subset of final plateau with *f=f^**, *h=0*
 
 In *Openstacks* & *Cybersec*,
 
@@ -453,7 +462,9 @@ Without proper tiebreaking strategy, the planner has no guidance,
 because any heuristic estimates are the same almost everywhere.
 #+END_RESUME
 
-* In positive cost domains with h-based tiebreaking,
+* Understanding the Final Plateau
+
+In positive cost domains,
 
 [[png:final-plateau2]]
 
@@ -487,7 +498,9 @@ If the parent of a node have the same f and h value, then the child has a depth 
 
 * Non-trivial Question: How to use the /Depth?/
 
-Within Final Plateau (f,h)=(f*,0), *all solutions are cost optimal* 
+Ignore the case h＞0 (because 0≦h≦h^*=0)
+
+Within Final Plateau f=f^*, *all solutions are cost optimal* regardless of depth
 
 #+BEGIN_ALIGNRIGHT
 because *all edge costs are 0.*
@@ -542,7 +555,9 @@ It may quickly pass and miss the important depth.
 [[png:final-plateau7]]
 
 #+BEGIN_ALIGNRIGHT
-Relations to Rapidly exploring Random Tree (RRT) ?
+Classic Exploration vs Exploitation problem
+
+Connections to Rapidly exploring Random Tree (RRT) ?
 #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
@@ -571,7 +586,7 @@ This is an interesting aspect similar to Rapidly exploring Random Tree.
 + Assign 0 cost to all actions *except one*
 + which represents a *realistic key resource*. For example,
   + Consume =wood= in Woodworking
-  + Consume =fuel= in Driverlog
+  + Consume =fuel= in Driverslog (transportation domain)
   + etc..
 + 1104 IPC instances → 620 zerocost instances (28 domains) 
 
@@ -594,13 +609,59 @@ We created 620 zerocost instances consisting of 28 domains.
 
 * Evaluation (participants)
 
-A^* with *[h, FIFO]*
 
-+ Selects the nodes with f_{min}
-+ *IF* multiple nodes have f_{min}
-  + Selects the nodes with h_{min}
-  + *IF* multiple nodes have h_{min}
-    + Select the oldest node (i.e. FIFO queue)
+#+BEGIN_CONTAINER-FLUID
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN6
+A* with *[h, FIFO]*
+
+Selects the nodes with /f_{min}/
+
+*IF* multiple nodes have /f_{min}/
+
+Selects the nodes with /h_{min}/
+
+*IF* multiple nodes have /h_{min}/
+
+Select the oldest node (i.e. FIFO)
+#+END_SPAN6
+#+BEGIN_SPAN6
+A* with *[h, LIFO]*
+
+Selects the nodes with /f_{min}/
+
+*IF* multiple nodes have /f_{min}/
+
+Selects the nodes with /h_{min}/
+
+*IF* multiple nodes have /h_{min}/
+
+Select the newest node (i.e. LIFO)
+#+END_SPAN6
+#+END_ROW-FLUID
+
+-----------
+
+#+BEGIN_ROW-FLUID
+#+BEGIN_SPAN1
+
+#+END_SPAN1
+#+BEGIN_SPAN10
+A* with *[h, RD, RO]*,
+
+Selects the nodes with /f_{min}/
+
+*IF* multiple nodes have /f_{min}/, selects the nodes with /h_{min}/
+
+*IF* multiple nodes have /h_{min}/, selects a random depth /d/
+
+*IF* multiple nodes in /d/, Select a node randomly
+#+END_SPAN10
+#+BEGIN_SPAN1
+
+#+END_SPAN1
+#+END_ROW-FLUID
+#+END_CONTAINER-FLUID
 
 
 #+BEGIN_RESUME
@@ -621,6 +682,7 @@ random. From the selected bucket, it selects a node at random.
 
 * Evaluation (number of problems solved)
 
+LMcut, Merge-and-Shrink(M&S) : state-of-the-art heuristic functions in planning
 
 | /                       | <            | >           | <>                |
 |                         | <c>          | <c>         | <c>               |
@@ -638,7 +700,7 @@ random. From the selected bucket, it selects a node at random.
 | Sum(1724)               |              |             |                   |
 |-------------------------+--------------+-------------+-------------------|
 
-［h, RD, RO］ shows the average of 10 runs (↑ <increase over [h,FIFO]>)
+［h, RD, RO］ shows the average of 10 runs (↑ ＜increase over [h,FIFO]＞)
 
 #+BEGIN_RESUME
 We tested these tiebreakings with a standard competition setting of 30 min,
@@ -648,6 +710,8 @@ whose values are computed in a completely different manner.
 #+END_RESUME
 
 * Evaluation (number of problems solved)
+
+LMcut, Merge-and-Shrink(M&S) : state-of-the-art heuristic functions in planning
 
 # [[png:static/results]]
 
@@ -667,7 +731,7 @@ whose values are computed in a completely different manner.
 | Sum(1724)               | 755          | 778         | *794.2* (↑ 39.2) |
 |-------------------------+--------------+-------------+-------------------|
 
-［h, RD, RO］ shows the average of 10 runs (↑ <increase over [h,FIFO]>)
+［h, RD, RO］ shows the average of 10 runs (↑ ＜increase over [h,FIFO]＞)
 
 #+BEGIN_ALIGNRIGHT
 *［h, RD, RO］ Outperformed Both [h,FIFO] and [h,LIFO] !*
@@ -680,7 +744,7 @@ significant improvement both in the IPC instances and in Zerocost instances.
 
 * Depth Distribution in Woodworking-cut p04
 
-"cut" action has positive cost, others have 0 cost
+"cut" action has positive cost (consumes wood), others have 0 cost
 
 #+BEGIN_CENTER
   
@@ -695,7 +759,7 @@ we plotted the number of nodes in each depth.
 
 * Depth Distribution in Woodworking-cut p04
 
-"cut" action has positive cost, others have 0 cost
+"cut" action has positive cost (consumes wood), others have 0 cost
 
 #+BEGIN_CENTER
   
@@ -709,7 +773,7 @@ Now we can first see FIFO is too biased toward the shallower region.
 
 * Depth Distribution in Woodworking-cut p04
 
-"cut" action has positive cost, others have 0 cost
+"cut" action has positive cost (consumes wood), others have 0 cost
 
 #+BEGIN_CENTER
   
@@ -723,7 +787,7 @@ And LIFO is too biased toward the deeper region.
 
 * Depth Distribution in Woodworking-cut p04
 
-"cut" action has positive cost, others have 0 cost
+"cut" action has positive cost (consumes wood), others have 0 cost
 
 #+BEGIN_CENTER
   
@@ -736,7 +800,7 @@ In contrast the distribution of RandomDepth draws a beautiful curve,
 showing that it distributes its effort among different depths.
 #+END_RESUME
 
-* Contributions & Conclusions
+* Contributions & Conclusions & Future Work
 
 #+BEGIN_SMALLER
 
@@ -744,17 +808,25 @@ showing that it distributes its effort among different depths.
   + The paper contains more analyses such as [h,FIFO] vs [FIFO], [h,RD,RO]
     vs [h,RO]
 + *Randomized depth-based tiebreaking outperforming the traditional strategies*
-  + Effective in the Final Frontier of the zero-cost domains, where no
-    heuristics can help
+  + Effective in the Final Frontier of the zero-cost domains, where no heuristics can help
+  + Depth-based approach has little disadvantage in positive-cost domains (depth is always 0)
 + *Understanding of the structure of the final plateau in zero-cost domains*
-+ *Depth Bias is harmful* : *exploration vs exploitation* problem in optimising search
-  + applications and connections to various technologies
-    + satisficing search ( cf. Yesterday talk by Valenzano! )
-    + RRTs (Rapidly exploring Random Tree)
-    + Phase transition of the search space
++ *Depth Bias is harmful -- classic exploration vs exploitation problem* in optimising search
+  + Various applications and connections to the other areas
+  + Sequential Satisficing Search ( cf. Yesterday talk by Richard Valenzano! )
+    + Use f/5 and ignore remainder : constant-error search /＜f^*+5/ solution?
+    + ↔ WA* with weight /w/ only provides /＜w×f^*/ solution
+  + Temporal Planning/Scheduling
+    + Short interleaved actions no longer increase the total makespan = 0-cost actions?
+  + Can we make the exploration more efficient?
+    + RRTs (Rapidly exploring Random Tree), MCTS (Monte Carlo Tree Search)
+    + Diverse BFS (Imai AAAI11), Plan-distance (RPGoldman AAAI15) etc...
++ "Plan Diversity is underinvestigated" --- Jorg Hoffman
+  + Related "exploration-based approach" might also be underinvestigated in planning?
 
 #+END_SMALLER
 
+    # + Desparate wisdom: *Does planning algorithms extend to continuous search?*
 #+BEGIN_CENTER
 Thanks for listening!
 #+END_CENTER
