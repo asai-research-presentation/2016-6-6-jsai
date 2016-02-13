@@ -64,67 +64,90 @@
      y="0" />
   <g
      id="g4183"
-     transform="matrix(0.78034682,0,0,0.78034682,0,-2.9123535e-6)">
+     transform="matrix(0.78034682,0,0,0.78034682,0,-52.000003)">
     <rect
        ry="0.35602647"
        rx="0.29761782"
        y="67.587982"
        x="1.5129111"
-       height="205.92574"
+       height="255.82904"
        width="212.01654"
        id="rect3030-9-9"
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.99921262;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <text
-       sodipodi:linespacing="110%"
+       sodipodi:linespacing="104%"
        id="text3051-6"
-       y="118.67085"
+       y="103.29307"
        x="108.05462"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:110.00000238%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.99921262;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       style="font-size:41.00740814px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:103.99999619%;letter-spacing:-0.79451853px;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.99921262;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
        xml:space="preserve"><tspan
          id="tspan4089"
-         y="118.67085"
-         x="108.05462"
+         y="103.29307"
+         x="107.65736"
          sodipodi:role="line">y-axis:</tspan><tspan
          id="tspan4095"
-         y="162.67085"
-         x="108.05462"
+         y="145.94077"
+         x="107.65736"
          sodipodi:role="line">number</tspan><tspan
          id="tspan4093"
-         y="206.67085"
-         x="108.05462"
+         y="188.58847"
+         x="107.65736"
          sodipodi:role="line"> of nodes</tspan><tspan
          id="tspan4087"
-         y="250.67085"
+         y="231.23618"
+         x="107.65736"
+         sodipodi:role="line">with f = f*</tspan><tspan
+         y="273.88388"
          x="108.05462"
-         sodipodi:role="line">with f = f*</tspan></text>
+         sodipodi:role="line"
+         id="tspan3044" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:30.75555611px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.16999996;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="107.93037"
+       y="268.3779"
+       id="text3048"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3050"
+         x="107.93037"
+         y="268.3779">(candidates</tspan><tspan
+         sodipodi:role="line"
+         x="107.93037"
+         y="306.82233"
+         id="tspan3052">for solution)</tspan></text>
   </g>
   <g
      id="g4191"
-     transform="matrix(0.78034682,0,0,0.78034682,0,-2.9123535e-6)">
+     transform="matrix(0.78034682,0,0,0.78034682,0,-14.000003)">
     <rect
        ry="0.35602647"
        rx="0.29761782"
        y="385.38458"
        x="122.14209"
-       height="105.29016"
+       height="128.50099"
        width="378.33011"
        id="rect3030-9-9-2"
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.99921262;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <text
-       sodipodi:linespacing="98.000002%"
+       sodipodi:linespacing="105%"
        id="text3051-6-0"
-       y="430.22495"
+       y="422.53607"
        x="311.94058"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:98.00000191%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.99921262;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       style="font-size:35.88148117px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:center;text-decoration:none;line-height:104.99999523%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:middle;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.99921262;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
        xml:space="preserve"><tspan
          id="tspan4095-4"
-         y="430.22495"
+         y="422.53607"
          x="311.94058"
          sodipodi:role="line">x-axis: Number</tspan><tspan
          id="tspan4087-3"
-         y="474.07437"
+         y="464.68024"
          x="311.94058"
-         sodipodi:role="line"> of nodes with f ≦ f*</tspan></text>
+         sodipodi:role="line"> of nodes with f ≦ f*</tspan><tspan
+         y="502.35577"
+         x="311.94058"
+         sodipodi:role="line"
+         id="tspan3054">(entire nodes in A*)</tspan></text>
   </g>
   <g
      id="g4178"
