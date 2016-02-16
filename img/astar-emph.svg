@@ -200,7 +200,7 @@
      inkscape:cx="363.21345"
      inkscape:cy="215.05175"
      inkscape:document-units="in"
-     inkscape:current-layer="g10759"
+     inkscape:current-layer="g8497"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -18214,7 +18214,7 @@
          id="text8924-4"
          y="307.52969"
          x="16.538418"
-         style="font-size:31.11922836000000103px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:113.99999856999998826%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404191999999991;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold;opacity:0.21632653"
+         style="font-size:31.11922836px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:113.99999857%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.21632655;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
          xml:space="preserve"><tspan
            y="307.52969"
            x="16.538418"
@@ -18223,7 +18223,7 @@
            y="343.00562"
            x="16.538418"
            sodipodi:role="line"
-           id="tspan8777">h: admissible heuristics</tspan><tspan
+           id="tspan8777">h: admissible estimate</tspan><tspan
            y="382.68924"
            x="16.538418"
            sodipodi:role="line"

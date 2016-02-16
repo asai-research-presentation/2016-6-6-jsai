@@ -392,14 +392,16 @@
     <text
        xml:space="preserve"
        style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:76.31999969;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
-       x="-25.979874"
-       y="271.67892"
+       x="-37.979874"
+       y="281.67892"
        id="text5761"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5763"
-         x="-25.979874"
-         y="271.67892">h-based tiebreaking is ok</tspan></text>
+         x="-37.979874"
+         y="281.67892">the problem can be alleviated by <tspan
+   style="font-style:italic;-inkscape-font-specification:Nimbus Sans L Bold Italic"
+   id="tspan3190">h</tspan>-based tiebreaking</tspan></text>
     <g
        id="g7041"
        clip-path="url(#clipPath7097)">
@@ -504,17 +506,17 @@
     <text
        xml:space="preserve"
        style="font-size:31.11922836px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
-       x="6.7954865"
-       y="369.4321"
+       x="67.011078"
+       y="374.52075"
        id="text8553"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="6.7954865"
-         y="369.4321"
+         x="67.011078"
+         y="374.52075"
          id="tspan8557">It provides a gradient</tspan><tspan
          sodipodi:role="line"
-         x="6.7954865"
-         y="408.33115"
+         x="67.011078"
+         y="413.4198"
          id="tspan3134">      that guides the search.</tspan></text>
     <image
        width="180"
@@ -531,7 +533,7 @@
        sodipodi:cy="342.74048"
        sodipodi:rx="128.46185"
        sodipodi:ry="44.751057"
-       d="m 111.6144,342.74048 a 128.46185,44.751057 0 1 1 -256.92371,0 128.46185,44.751057 0 1 1 256.92371,0 z"
+       d="m 111.6144,342.74048 c 0,24.71532 -57.514336,44.75106 -128.461858,44.75106 -70.947522,0 -128.461852,-20.03574 -128.461852,-44.75106 0,-24.71533 57.51433,-44.75106 128.461852,-44.75106 70.947522,0 128.461858,20.03573 128.461858,44.75106 z"
        transform="matrix(0.55154931,0,0,0.55154931,69.678881,436.90522)" />
   </g>
   <g

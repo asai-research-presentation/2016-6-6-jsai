@@ -141,10 +141,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.7740223"
-     inkscape:cx="603.29065"
-     inkscape:cy="274.38505"
+     inkscape:cx="287.62382"
+     inkscape:cy="319.48031"
      inkscape:document-units="in"
-     inkscape:current-layer="g12258-0-3"
+     inkscape:current-layer="g8497"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -17977,7 +17977,7 @@
            y="343.00562"
            x="16.538418"
            sodipodi:role="line"
-           id="tspan8777">h: admissible heuristics</tspan><tspan
+           id="tspan8777">h: admissible estimate</tspan><tspan
            y="382.68924"
            x="16.538418"
            sodipodi:role="line"
