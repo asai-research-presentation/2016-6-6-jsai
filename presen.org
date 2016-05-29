@@ -15,39 +15,55 @@
 _Masataro Asai_, Alex Fukunaga
 
 University of Tokyo
+
+Presented in JSAI-16, Jun 6, 2016
+
+Presented in AAAI-16, Feb 15 2016
 #+END_CENTER
 
 #+BEGIN_RESUME
-hello everyone, I am masataro asai presenting the tiebreaking strategies for A* search.
+さてこんにちは、東京大学の浅井と申します。
+今日は教科書にも載っていて誰でも知っているはずのグラフ探索手法、A*アルゴリズムの改良についてお話します。
 #+END_RESUME
 #+END_outline-text-1
 
-* Summary: /We improved A*'s performance only by changing the Tiebreaking Strategy !!/
+* 先に結果: /A*の性能をタイブレーキングを変えるだけで改善!!/
 
 #+BEGIN_CENTER
-Number of Solved Instances
+1724問中、4GBメモリ制限で5分以内に解けた問題の数
 #+END_CENTER
 
-|                         | <c>              | <c>      |
-|                         | Default          | Proposed |
-| Domain Set              | in Fast Downward |          |
-|-------------------------+------------------+----------|
-| IPC^1 Instances (1104)  | 558              | *573*    |
-| Zerocost Instances(680) | 256              | *294*    |
-| Sum (1724)              | 814              | *867*    |
-|-------------------------+------------------+----------|
+|                         | <c>              | <c>         |
+|                         | Default          | 提案手法    |
+| 問題セット              | in Fast Downward |             |
+|-------------------------+------------------+-------------|
+| IPC^1 Instances (1104)  | 558              | *573*       |
+| Zerocost Instances(680) | 256              | *294*       |
+| Sum (1724)              | 814              | *867* (+53) |
+|-------------------------+------------------+-------------|
 
-IPC^1 : International Planning Competition
+IPC^1 : International Planning Competition で使われる 高次元グラフ探索ベンチマーク
+
+(35種類の問題集)×(20〜50問)
+
+それぞれの問題集は全く異なる性質の *最適化問題をモデル化*
+
+*問題番号が進むと 指数的に難しくなる*
 
 #+BEGIN_ALIGNRIGHT
-Solved *53 more instances!*
+*53問 多く解ける = スゴイ速い*
 #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
-Fast Forward, we improved the state of the art just by improving the
-tiebreaking behavior of A^* on the standard benchmark instances.
+先に結果を話します。やったことは、State-of-the-Artを改善したということです。
+コンペティションで用いられる高次元グラフ探索のベンチマーク1724問中、
+4GBメモリ制限で5分以内に解けた問題の数を比べます。
+ベンチマークは35種類の問題集からなり、それぞれの問題集は20から50問の問題からなります。
+それぞれの問題集は全く異なる性質の *最適化問題をモデル化* しています。
+また、 *問題番号が進むと 指数的に難しくなる* 性質があります。
+従って、53問 多く解けるということは一言で言えば スゴイ速い ということです。
 
-Let's see what's happening.
+まあこれだとちょっと飛ばしすぎましたので、よりバックグラウンドについて丁寧にお話をします。
 #+END_RESUME
 
 * Main Topic : Optimal Graph Search
