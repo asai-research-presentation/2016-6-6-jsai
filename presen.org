@@ -30,17 +30,18 @@ Presented in AAAI-16, Feb 15 2016
 * 先に結果: /A*の性能をタイブレーキングを変えるだけで改善!!/
 
 #+BEGIN_CENTER
-1724問中、4GBメモリ制限で5分以内に解けた問題の数
+1724問中、2GBメモリ制限で30分以内に解けた問題の数
 #+END_CENTER
 
-|                         | <c>              | <c>         |
-|                         | Default          | 提案手法    |
-| 問題セット              | in Fast Downward |             |
-|-------------------------+------------------+-------------|
-| IPC^1 Instances (1104)  | 558              | *573*       |
-| Zerocost Instances(680) | 256              | *294*       |
-| Sum (1724)              | 814              | *867* (+53) |
-|-------------------------+------------------+-------------|
+|                         | <c>                           | <c>           |
+|                         | Fast Downward (2006〜)        | 提案手法      |
+| 問題セット              | State-of-the-Art 探索システム |               |
+|-------------------------+-------------------------------+---------------|
+| IPC^1 Instances (1104)  | 558                           | *573*         |
+| Zerocost Instances(680) | 256                           | *294*         |
+|-------------------------+-------------------------------+---------------|
+| 合計 (1724)             | 814                           | *867* ( + 53) |
+|-------------------------+-------------------------------+---------------|
 
 IPC^1 : International Planning Competition で使われる 高次元グラフ探索ベンチマーク
 
@@ -51,7 +52,9 @@ IPC^1 : International Planning Competition で使われる 高次元グラフ探
 *問題番号が進むと 指数的に難しくなる*
 
 #+BEGIN_ALIGNRIGHT
+#+BEGIN_LARGER
 *53問 多く解ける = スゴイ速い*
+#+END_LARGER
 #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
@@ -66,7 +69,7 @@ IPC^1 : International Planning Competition で使われる 高次元グラフ探
 まあこれだとちょっと飛ばしすぎましたので、よりバックグラウンドについて丁寧にお話をします。
 #+END_RESUME
 
-* Main Topic : Optimal Graph Search
+* 今回の話題 : グラフの最短経路探索
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
@@ -78,11 +81,11 @@ IPC^1 : International Planning Competition で使われる 高次元グラフ探
 
 #+BEGIN_LARGER
 #+BEGIN_CENTER
-*Shortest path*
+*初期ノード* から
 
-from the *Initial Node*
+*ゴールノード* への
 
-to the *Goal Node(s)*
+*最短経路探索*
 #+END_CENTER
 #+END_LARGER
 
@@ -91,37 +94,32 @@ to the *Goal Node(s)*
 #+END_CONTAINER-FLUID
 
 #+BEGIN_RESUME
-The main topic of my talk is the optimal graph search problem whose task is
-to find a optimal or shortest path from the initial state to the goal
-state. I don't know why my presentation is in the planning session.
+今回の話題はグラフの最短経路探索です。
+目標は、グラフをたどっていって辺のコストの和が最小になるような経路を探すこと。
+経路を見つけることと、見つけた経路が最小である証明を同時に行う必要があります。
 #+END_RESUME
 
-# * Dijkstra
-# 
-# [[png:dijkstra]]
-
-* Optimal Search with A* ...
-
-# Guaranteed to find an optimal solution when /heuristic function/ $h(s)$ is admissible
+* A* で最短経路探索 ?
 
 [[png:astar]]
 
 #+BEGIN_RESUME
-currently, the most prevarent method for optimal graph search is A* algorithm.
-In A*, a node has g-value, which is the current shortest cost from the initial state,
-and h-value, which is a result of a heuristic function h, which should be admissible in the optimal search.
-Their sum, f, is a lower bound of the cost of the shortest path, f*.
+最短経路探索アルゴリズムのうち最も主流の手法はA*です。
+A*では、ノードは主に3つの値を持ちます。
+g値はそのノードまで現在見つかっている最小経路。
+h値はヒューリスティック関数の計算結果であり、現在からゴールまでの距離の下界値で、
+最短経路探索では許容的である必要があります。
+この2つの和fは、最短経路のコストのに対する下界になっています。
 
-In order to prove optimality,
-A* is required to expand all nodes whose f is smaller than f*.  Due to this
-requirement, A* expands the nodes with the smallest f value each time.
+実際の最短コストがf*だとすると、
+経路の最短性を保証するために、
+A* は f* よりもf値が小さい全てのノードを展開する必要があります。
+調べ残しを許さないために、A*は現在キューに入っているノードを小さい順に調べます。
 
-However, this description lacks one important aspect of A*.
+しかし、この説明はA*の大切なある側面を見落としています。
 #+END_RESUME
 
-* Optimal Search with A* ... w/o Tiebreaking Strategy.
-
-# Guaranteed to find an optimal solution when /heuristic function/ $h(s)$ is admissible
+* A* で最短経路探索 ただしタイブレーキング無視!
 
 [[png:astar-emph]]
 
@@ -130,28 +128,28 @@ The aspect is the tiebreaking strategy. What happens when more than 2 nodes
 have the same f-minimum? In such cases, a tiebreaking strategy should select which node to expand.
 #+END_RESUME
 
-* Conventional Wisdom regarding Tiebreaking
+* タイブレーキングに関する「常識」
 
 #+BEGIN_CENTER
-How to select from multiple nodes with the same /f_{min}/?
+*同じ /f_{min}/ なノードが複数あったときどうする?*
 #+END_CENTER
 
-|                                  | Tiebreaking                                 |
-|----------------------------------+---------------------------------------------|
-| *Early work*                     |                                             |
-| /1968 Hart, Nilsson and Raphael/ | */h/-based tiebreaking* [ /h/ ] :           |
-|                                  | 　　 -- selects the least h value           |
-| /common around 1985/             | *LIFO tiebreaking* [LIFO] :                 |
-|                                  | 　　 -- selects the most recently generated |
-|----------------------------------+---------------------------------------------|
-| *Recent years...*                |                                             |
-| /2007 Hansen and Zhou/           | [ /h/ ] "well-known to achieve              |
-|                                  | 　　　　　　the best performance"           |
-| /2010 Holte/                     | [ /h/ ] "most often done"                   |
-|----------------------------------+---------------------------------------------|
+|----------------------------------+------------------------------------|
+| *太古の昔*                       |                                    |
+| /1968 Hart, Nilsson and Raphael/ | */h/-based tiebreaking* [ /h/ ] :  |
+| (*/最初のA*の論文/*)             | 　　 -- h値が小さなものを選択      |
+|                                  |                                    |
+| /1985ごろにはすでに有名/         | *LIFO tiebreaking* [LIFO] :        |
+|                                  | 　　 -- 最後に生成したノードを選択 |
+|----------------------------------+------------------------------------|
+| *最近は...*                      |                                    |
+| /2007 Hansen and Zhou/           | [ /h/ ] "が一番うまく行くと        |
+|                                  | 　　　　　　一般的に知られている"  |
+| /2010 Holte/                     | [ /h/ ] "がよく使われる"           |
+|----------------------------------+------------------------------------|
 
 #+BEGIN_ALIGNRIGHT
-*Rule-of-Thumb is [ /h/ ] but it's like a folklore!*
+*「常識」= [ /h/ ] タイブレーキングだが、それって迷信では??*
 #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
@@ -172,32 +170,34 @@ There are sometimes no mention at all.
 Overall, it seems that the current rule-of-thumb is to use h-based tiebreaking.
 #+END_RESUME
 
-* [ /h/ ] is underspecified
+* そもそも [ /h/ ] だけではちゃんとタイブレークできない
 
-*What happens if there are still /multiple/ nodes with the same /h/ ?*
+/*f*/ も /*h*/ も同じノードが複数あったらどうするのか?
 
-→ There must be a *2nd Tiebreaking /X/* : denoted as [ /h/ , */X/* ]
+→ *二段階のタイブレーク法 /X/ が必要*  : 配列表記して [ /h/ , */X/* ]
 
-Example -- A* with *[ /h/ , /LIFO/ ]* : Selects the nodes with /f_{min}/. 
+(例) *[* /*h*/ , */LIFO/ ]* を使うA*の動作とは?
 
-+ *IF* multiple nodes have /f_{min}/, selects the nodes with /h_{min}/  (1st tiebreaking).
-+ *IF* multiple nodes have /h_{min}/, select the most recent node (2nd tiebreaking).
++ 常に /*f_{min}*/ なノードを選ぶ。
++ *ただし* 複数ノードが /*f_{min}*/ なら, /*h_{min}*/ のノードを選ぶ (第一段階).
++ *まだ* 複数のノードがあるなら, LIFOに従い最後に生成したノードを選ぶ (第二段階).
   #+BEGIN_ALIGNRIGHT
   #+BEGIN_SMALLER
-  (i.e. popping a LIFO queue: always returns exactly 1 node)
+  ( LIFO キューは常に1つのノードを返すのでコレ以上は必要ない )
   #+END_SMALLER
   #+END_ALIGNRIGHT
 
-|-----------------------------------------------+---------------------------------|
-| Solver code on github by /2012 Burns et. al./ | [ /h/, LIFO (*not documented*)] |
-| (current) Fast Downward                       | [ /h/, FIFO (*not documented*)] |
-|-----------------------------------------------+---------------------------------|
+|---------------------------------------------------+-----------------------------------------|
+| 古典プランニングState-of-the-Art Fast Downward    | [ /h/, *FIFO* (*論文には書かれてない*)] |
+| /2012 Burns et. al./ がGithubで公開しているコード | [ /h/, *LIFO* (*論文には書かれてない*)] |
+|                                                   | ほかも大抵書いてない                    |
+|---------------------------------------------------+-----------------------------------------|
 
 #+BEGIN_ALIGNRIGHT
 #+BEGIN_LARGER
-+ Details (such as 2nd-tiebreaking /X/) are *considered unimportant?*
++ そんな細かいこと (第二段階) は *書くほどのことでもない?*
 
-  (compared to the improvement of the heuristics, search algorithm?)
+  (下界関数の改善やA*自体の拡張など他に注目しがち)
 #+END_LARGER
 #+END_ALIGNRIGHT
 
@@ -214,13 +214,11 @@ Both of these are not specified in the paper.
 In other words, these details are not considered important.
 #+END_RESUME
 
-* TODO In Fact, Tiebreaking is Quite Important
+* でも実際は、 タイブレーク法は /超重要/
 
 #+BEGIN_LARGER
 #+BEGIN_CENTER
-*Most of the runtime, search is controlled*
-
- */solely by the tiebreaking/.*
+*探索時間のほとんどは* */タイブレークに費やされる/.*
 #+END_CENTER
 #+END_LARGER
 
@@ -231,21 +229,24 @@ In other words, these details are not considered important.
 #+END_SPAN6
 #+BEGIN_SPAN6
 
-←In the standard benchmark sets,
+←標準ベンチマーク問題集では、
 
 #+BEGIN_LARGER
 #+BEGIN_CENTER
-*Most nodes have f=f^**.
+*探索空間中 ほとんどの*
 
-(i.e. *Final Plateau*, 　　
+*ノードが f=f^**.
 
-where the solutions exist)
+( *Final Plateau* と呼ぶ。
+小さい順に探索して最後だから)
 #+END_CENTER
 
 　
 
 #+BEGIN_CENTER
-*Tiebreaking controls the most of the search.*
+*A*の挙動のほとんどは*
+
+*実はタイブレークだけによって決まる。*
 #+END_CENTER
 #+END_LARGER
 #+END_SPAN6
@@ -267,22 +268,24 @@ Thus, in this plateau,
 the search is controlled solely by the tiebreaking.
 #+END_RESUME
 
-* Testing if the 2nd Tiebreaking Really Matters
+* 第二段階のタイブレークが重要か調べてみた
 
-| <c>                           | <c>                               | <c>       |
-| Tiebreaking                   | Description                       | Solved    |
-| ［criterion_1, criterion_2 ］ | (applied in left-to-right)        | Instances |
-|-------------------------------+-----------------------------------+-----------|
-| ［ /h/,  *LIFO* ］            | same /f_{min}/ → select smallest h |           |
-|                               | same h → break ties in LIFO      |           |
-|-------------------------------+-----------------------------------+-----------|
-| ［ /h/,  *FIFO* ］            | *default setting of FD*           |           |
-|-------------------------------+-----------------------------------+-----------|
+| <c>                           | <c>                                     | <c>       |
+| Tiebreaking                   | 説明                                    | Solved    |
+| ［criterion_1, criterion_2 ］ |                                         | Instances |
+|-------------------------------+-----------------------------------------+-----------|
+| ［ /h/,  *LIFO* ］            | 同じ /*f_{min}*/ → 最小の /*h*/ を選ぶ |           |
+|                               | 同じ /*h_{min}*/ → *LIFO* で選ぶ       |           |
+|-------------------------------+-----------------------------------------+-----------|
+| ［ /h/,  *FIFO* ］            | *Fast Downwardの標準設定*               |           |
+|-------------------------------+-----------------------------------------+-----------|
 
 #+BEGIN_ALIGNRIGHT
-on 1104 IPC (International Planning Competition) instances
+1104題の IPC (International Planning Competition) ベンチマーク問題集
 
-30min, 2GB setting with the same heuristics (LMcut)
+30min, 2GB の資源制限 ヒューリスティック関数は Landmark-Cut (Helmert2008)
+
+ Fast Downward : State-of-the-Art 探索ソルバの名前
 
 　
 
@@ -303,30 +306,30 @@ If there are still multiple nodes have the same h value, it breaks ties accordin
 We tested these strategies on IPC instances.
 #+END_RESUME
 
-* Testing if the 2nd Tiebreaking Really Matters
+* 第二段階のタイブレークが重要か調べてみた → 重要だった!
 
-# Results (on 1104 IPC instances,  LMcut, 30min, 2GB)
-
-| <c>                           | <c>                               | <c>       |
-| Tiebreaking                   | Description                       | Solved    |
-| ［criterion_1, criterion_2 ］ | (applied in left-to-right)        | Instances |
-|-------------------------------+-----------------------------------+-----------|
-| ［ /h/, *LIFO* ］             | same /f_{min}/ → select smallest h | *565*     |
-|                               | same h → break ties in LIFO      |           |
-|-------------------------------+-----------------------------------+-----------|
-| ［ /h/, *FIFO* ］             | *default setting of FD*           | 558       |
-|-------------------------------+-----------------------------------+-----------|
+| <c>                           | <c>                                     | <c>       |
+| Tiebreaking                   | 説明                                    | Solved    |
+| ［criterion_1, criterion_2 ］ |                                         | Instances |
+|-------------------------------+-----------------------------------------+-----------|
+| ［ /h/,  *LIFO* ］            | 同じ /*f_{min}*/ → 最小の /*h*/ を選ぶ | *565*     |
+|                               | 同じ /*h_{min}*/ → *LIFO* で選ぶ       |           |
+|-------------------------------+-----------------------------------------+-----------|
+| ［ /h/,  *FIFO* ］            | *Fast Downwardの標準設定*               | 558       |
+|-------------------------------+-----------------------------------------+-----------|
 
 #+BEGIN_ALIGNRIGHT
-on 1104 IPC (International Planning Competition) instances
+1104題の IPC (International Planning Competition) ベンチマーク問題集
 
-30min, 2GB setting with the same heuristics (LMcut)
+30min, 2GB の資源制限 ヒューリスティック関数は Landmark-Cut (Helmert2008)
+
+ Fast Downward : State-of-the-Art 探索ソルバの名前
 
 #+BEGIN_LARGER
-*［h, LIFO ］ outperforms ［h, FIFO ］*
+*［h, LIFO ］ は ［h, FIFO ］ より速い*
 #+END_LARGER
 
-the 2nd tiebreaking makes difference
+*第二タイブレークは重要!*
 #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
@@ -335,7 +338,11 @@ surprising result, considering that only the 2nd tiebreaking
 difference caused such a difference.
 #+END_RESUME
 
-* TODO Comparing [h,FIFO] and [h,LIFO] per Domain (Instance Set)
+* TODO [h,FIFO] と [h,LIFO] をドメイン (問題セット) ごとに比較
+
+#+BEGIN_CENTER
+( 1104題 = (35の問題セット) × (20〜50問) )
+#+END_CENTER
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
@@ -345,16 +352,23 @@ difference caused such a difference.
 #+BEGIN_SPAN6
 
 #+BEGIN_CENTER
-The difference occurs only in
+違いが出たドメインは
 
 #+BEGIN_LARGER
 *Openstacks* & *Cybersec*
 #+END_LARGER
 
-*LIFO is x10 faster than FIFO*
+*LIFO は FIFO より 10 倍速い*
 
-(In other domains the performance is comparable.)
+(他のドメインでは凡そ同じ)
 
+　
+
+　
+
+補足:
+
+( /*h*/ なし→どのドメインでもLIFOの圧勝)
 #+END_CENTER
 #+END_SPAN6
 #+END_ROW-FLUID
@@ -369,29 +383,27 @@ see, their difference is small in most domains except Openstacks
 and Cybersec.
 #+END_RESUME
 
-* What makes /Openstacks/ & /Cybersec/ Different?
+* /Openstacks/ & /Cybersec/ は何が特別なのか?
 
-Many *zero-cost actions*
+他と違い、多くの *ゼロコスト エッジ* が含まれる
 
 #+BEGIN_SMALLER
-which (before proceeding, let me say...) enables
+ゼロコストエッジがあることによって
 #+END_SMALLER
 
-the modelling of many *practical applications* w/ *key resource minimization*
+*実問題に近い* 、特定の評価関数を最小化するモデルになっている
 
-+ Consider a *transportation domain w/ fuel minimization.*
++ *輸送・配達問題* を *燃料を最小化する* ようにモデル化
   #+BEGIN_ALIGNRIGHT
-  Assign 0 cost to all actions *except drive-truck*
-
-  which burns some fuel.
+  「運転」アクション以外は *ゼロコスト* (例: 荷物の受け渡しに燃料は必要ない)
   #+END_ALIGNRIGHT
-+ *Openstacks is an application domain* from Operations Research (Fink and Voss, 1999)
++ *Openstacks は OR分野の問題* (Fink and Voss, 1999)
   #+BEGIN_ALIGNRIGHT
-  minimize the # of stacks, 0-cost unless consuming stacks.
+  用いる *stack* の数を最小化、 *stack* を使わない行為はゼロコスト
   #+END_ALIGNRIGHT
-+ *Cybersec is also an application domain.* (BAMS, Boddy et. al.)
++ *Cybersec(urity) も実問題由来* (BAMS システム, Boddy et. al. 2005)
   #+BEGIN_ALIGNRIGHT
-  The great talk by Joerg Hoffmann in the last ICAPS!
+  企業ネットワークを自動攻撃する検証システム, 必要なパスワード解析の回数を最小化
   #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
@@ -408,7 +420,7 @@ Another interesting example is a realistic transportation domain with fuel optim
 In such as setting, the domain will assign 0 to all action costs except drive-truck.
 #+END_RESUME
 
-* TODO Zero-cost actions makes /h/-Tiebreaking difficult
+* TODO ゼロコストがあると /*h*/ によるタイブレークが働かない
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
@@ -418,22 +430,22 @@ In such as setting, the domain will assign 0 to all action costs except drive-tr
 #+BEGIN_SPAN6
 
 #+BEGIN_CENTER
-← A stricter subset of final plateau with *f=f^**, *h=0*
+← 前回の絵より狭い定義の *final plateau* : *f=f^**, *h=0*
 
-In *Openstacks* & *Cybersec*,
+*Openstacks* と *Cybersec* では
 
-Almost all nodes have *h=0*.
+ほぼ全てのノードが *h=0*.
 
 #+BEGIN_LARGER
-*⇒ /h/-tiebreaking has*
+*⇒ /h/-タイブレーキングは*
 
-*no effect*
+*全く効果がない*
 #+END_LARGER
 
 #+BEGIN_LARGER
-*⇒search is controlled /solely by the 2nd tiebreaking/*
+*⇒探索は /第二タイブレーク法/*
 
-*/LIFO or FIFO/*
+*/LIFO or FIFO だけが支配/*
 #+END_LARGER
 #+END_CENTER
 #+END_SPAN6
@@ -441,7 +453,7 @@ Almost all nodes have *h=0*.
 #+END_CONTAINER-FLUID
 
 #+BEGIN_ALIGNRIGHT
-Thus, *to improve upon LIFO*, we should understand these search spaces.
+*LIFOを上回る性能を達成するためには*, もう一段踏み込んだ分析が必要。
 #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
@@ -459,7 +471,7 @@ Thus, to improve upon LIFO, we should understand Final Plateau.
 
 # , and the LIFO and FIFO plays the primary role. 
 
-* Understanding the Final Plateau
+* Final Plateau の分析
 
 [[png:final-plateau0]]
 
@@ -468,7 +480,7 @@ First of all, this is the traditional understanding of the search space of
 A*. However, this is actually not the case, because
 #+END_RESUME
 
-* Understanding the Final Plateau
+* Final Plateau の分析
 
 [[png:final-plateau]]
 
@@ -479,9 +491,9 @@ Without proper tiebreaking strategy, the planner has no guidance,
 because any heuristic estimates are the same almost everywhere.
 #+END_RESUME
 
-* Understanding the Final Plateau
+* Final Plateau の分析
 
-In positive cost domains,
+*/常に コスト ＞ ０/ なドメインに限れば、*
 
 [[png:final-plateau2]]
 
@@ -489,7 +501,7 @@ In positive cost domains,
 In positive-cost domains, the h-based tiebreaking is useful because it provides a gradient toward the goal.
 #+END_RESUME
 
-* But when almost all edges are 0-cost...
+* ほぼ全ての辺がゼロコストだと...
 
 [[png:final-plateau3]]
 
@@ -498,9 +510,11 @@ However, in zero-cost domains, almost all h values are 0, and h-based tiebreakin
 The problem is, how can we give a useful guidance in such a region?
 #+END_RESUME
 
-* Depth-based Tiebreaking
+* Final Plateau の中の Depth (深さ)
 
 [[png:final-plateau4]]
+
+初期ノードからの深さとは異なる
 
 #+BEGIN_RESUME
 Here, we propose a depth-based tiebreaking.
@@ -513,32 +527,23 @@ a plateau entrance, and its depth is 0.
 If the parent of a node have the same f and h value, then the child has a depth larger by one.
 #+END_RESUME
 
-* Non-trivial Question: How to use the /Depth?/
+* 深さをどう使う?
 
-Assume h=0 (because 0≦h≦h^*=0)
-
-Within Final Plateau f=f^*, *all solutions are cost optimal* regardless of depth
+Final Plateau f=f^* では, *どのゴールもコスト最適* で、深さは関係ない
 
 #+BEGIN_ALIGNRIGHT
-because *all edge costs are 0.*
+なぜなら *どの辺もゼロコストだから.*
 #+END_ALIGNRIGHT
 
 [[png:final-plateau4-2]]
 
 #+BEGIN_ALIGNRIGHT
 #+BEGIN_LARGER
-We found that *DEPTH BIAS IS NOT A GOOD IDEA.*
+従って *探索する時に深さに偏りがあるのは良くない.*
 #+END_LARGER
 #+END_ALIGNRIGHT
 
-#+BEGIN_RESUME
-The next problem is how to use the depth.  In designing such a strategy, we
-should note that within final plateau, any solutions are cost optimal
-because all edge costs are 0.
-In this context, introducing a bias in each depth is not a good idea.
-#+END_RESUME
-
-** Example: selecting the smallest depth?
+** 例: 常に浅いところから探索するのは良くない
 
 # /FirstDepth/ tiebreaking strategy : ［ h, /fd/ ］
 
@@ -553,7 +558,7 @@ FirstDepth tends to search the neighborhood of plateau entrance exhaustively,
 and takes too much time to reach the appropriate depth.
 #+END_RESUME
 
-** Example: selecting the largest depth?
+** 例: 常に深いところから探索するのも良くない
 
 # /LastDepth/ tiebreaking strategy :  ［ h, /ld/ ］
 
@@ -571,11 +576,11 @@ It may quickly pass and miss the important depth.
 
 [[png:final-plateau7]]
 
-#+BEGIN_ALIGNRIGHT
-Classic Exploration vs Exploitation problem
-
-Connections to Rapidly exploring Random Tree (RRT) ?
-#+END_ALIGNRIGHT
+# #+BEGIN_ALIGNRIGHT
+# Classic Exploration vs Exploitation problem
+# 
+# Connections to Rapidly exploring Random Tree (RRT) ?
+# #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
 Finally, we propose RandomDepth tiebreaking which removes the depth bias.
@@ -597,15 +602,13 @@ This is an interesting aspect similar to Rapidly exploring Random Tree.
 # 
 # [[png:final-plateau7]]
 
-* Evaluation (domains)
+* 評価 (用いた問題集)
 
-+ IPC^1 Instances (1104 instances)
-+ *Zero-cost* domains (620 instances, 28 domains)
-  + Modified IPC^1  optimal track instances
-  + Assign 0 cost to all actions *except one*
-  + which consumes a *realistic key resource*. For example,
-    + =cut= consumes =wood= in Woodworking
-    + =drive-truck= consumes =fuel= in Driverslog (transportation domain)
++ IPC^1 問題集 (1104 instances)
++ *Zero-cost* 問題集 (620 instances, 28 domains)
+  + IPC^1 を *資源消費最適化問題* 改変したもの。例:
+    + Woodworking ドメイン: 元問題:最短工程を探索→ 木材消費の最適化
+    + Driverslog (運送ドメイン): 最短工程 → 燃料消費の最適化
     + etc..
 
 #+BEGIN_NOTE
@@ -623,34 +626,33 @@ such as wood, fuel or electricity.
 We created 620 zerocost instances consisting of 28 domains.
 #+END_RESUME
 
-* Evaluation (participants)
-
+* 評価 (用いた探索設定 (おさらい))
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
 #+BEGIN_SPAN6
 A* with *[h, FIFO]*
 
-Selects the nodes with /f_{min}/
+/*f_{min}*/ のノードを選ぶ を満たす
 
-*IF* multiple nodes have /f_{min}/
+*もし* 複数ノードが /*f_{min}*/ なら
 
-Selects the nodes with /h_{min}/
+/*h_{min}*/ を満たすノードを選ぶ
 
-*IF* multiple nodes have /h_{min}/
+*もし* 複数ノードが /*h_{min}*/ なら
 
 Select the oldest node (i.e. FIFO)
 #+END_SPAN6
 #+BEGIN_SPAN6
 A* with *[h, LIFO]*
 
-Selects the nodes with /f_{min}/
+/*f_{min}*/ を満たすノードを選ぶ
 
-*IF* multiple nodes have /f_{min}/
+*もし* 複数ノードが /*f_{min}*/ なら
 
-Selects the nodes with /h_{min}/
+/*h_{min}*/ を満たすノードを選ぶ
 
-*IF* multiple nodes have /h_{min}/
+*もし* 複数ノードが /*h_{min}*/ なら
 
 Select the newest node (i.e. LIFO)
 #+END_SPAN6
@@ -665,13 +667,13 @@ Select the newest node (i.e. LIFO)
 #+BEGIN_SPAN10
 A* with *[h, RD, RO]*,
 
-Selects the nodes with /f_{min}/
+/*f_{min}*/ を満たすノードを選ぶ
 
-*IF* multiple nodes have /f_{min}/, selects the nodes with /h_{min}/
+*もし* 複数ノードが /*f_{min}*/ なら, /*h_{min}*/ のノードを選ぶ
 
-*IF* multiple nodes have /h_{min}/, selects a random depth /d/
+*もし* 複数ノードが /*h_{min}*/ なら, ランダムに深さ /d/ を選ぶ
 
-*IF* multiple nodes in /d/, Select a node randomly
+*もし* 複数ノードが /d/ にいるなら, そのなかからランダムにノードを選ぶ
 #+END_SPAN10
 #+BEGIN_SPAN1
 
@@ -696,12 +698,12 @@ into several buckets according to the depth d, then select a bucket at
 random. From the selected bucket, it selects a node at random.
 #+END_RESUME
 
-* Evaluation (number of problems solved)
+* 評価 (制限時間内に解けた問題の数)
 
 #+BEGIN_SMALLER
-LMcut, Merge-and-Shrink(M&S) : state-of-the-art heuristic functions in planning
+LMcut, Merge-and-Shrink(M&S) : state-of-the-art ヒューリスティック関数
 
-［h, RD, RO］ shows the average of 10 runs (↑ ＜increase over [h,FIFO]＞)
+［h, RD, RO］ は 10回の平均
 #+END_SMALLER
 
 | /                       | <            | >           | <>                |
@@ -727,12 +729,12 @@ heuristics, which are both the state-of-the-arts but
 whose values are computed in a completely different manner.
 #+END_RESUME
 
-* Evaluation (number of problems solved)
+* 評価 (制限時間内に解けた問題の数)
 
 #+BEGIN_SMALLER
-LMcut, Merge-and-Shrink(M&S) : state-of-the-art heuristic functions in planning
+LMcut, Merge-and-Shrink(M&S) : state-of-the-art ヒューリスティック関数
 
-［h, RD, RO］ shows the average of 10 runs (↑ ＜increase over [h,FIFO]＞)
+［h, RD, RO］ は 10回の平均
 #+END_SMALLER
 
 | /                       | <            | >           | <>                |
@@ -752,7 +754,7 @@ LMcut, Merge-and-Shrink(M&S) : state-of-the-art heuristic functions in planning
 |-------------------------+--------------+-------------+-------------------|
 
 #+BEGIN_ALIGNRIGHT
-*［h, RD, RO］ Outperformed Both [h,FIFO] and [h,LIFO] !*
+*［h, RD, RO］ は [h,FIFO] と [h,LIFO] より圧倒的に良い!*
 #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
@@ -760,7 +762,7 @@ And this is the result. We achieved a
 significant improvement both in the IPC instances and in Zerocost instances.
 #+END_RESUME
 
-* Depth Distribution in Woodworking-cut p04
+* Woodworking問題での深さの分布
 
 "cut" action has positive cost (consumes wood), others have 0 cost
 
@@ -775,7 +777,7 @@ Next, in order to see our plateau theory actually holds,
 we plotted the number of nodes in each depth.
 #+END_RESUME
 
-* Depth Distribution in Woodworking-cut p04
+* Woodworking問題での深さの分布
 
 "cut" action has positive cost (consumes wood), others have 0 cost
 
@@ -789,7 +791,7 @@ we plotted the number of nodes in each depth.
 Now we can first see FIFO is too biased toward the shallower region.
 #+END_RESUME
 
-* Depth Distribution in Woodworking-cut p04
+* Woodworking問題での深さの分布
 
 "cut" action has positive cost (consumes wood), others have 0 cost
 
@@ -803,7 +805,7 @@ Now we can first see FIFO is too biased toward the shallower region.
 And LIFO is too biased toward the deeper region.
 #+END_RESUME
 
-* Depth Distribution in Woodworking-cut p04
+* Woodworking問題での深さの分布
 
 "cut" action has positive cost (consumes wood), others have 0 cost
 
@@ -818,15 +820,14 @@ In contrast the distribution of RandomDepth draws a beautiful curve,
 showing that it distributes its effort among different depths.
 #+END_RESUME
 
-* Contributions
+* まとめ (論文の貢献内容)
 
-+ *In-depth analysis of the tiebreaking strategies*
-  + The paper contains more analyses
-    + ([h,FIFO] vs [FIFO], [h,RD,RO] vs [h,RO] etc.)
-+ *Randomized depth-based tiebreaking* in zero-cost domains
-  + *no heuristics can help* because the optimal cost is 0
-+ *Understanding of the structure of the final plateau*
-  + *Depth Bias is harmful* -- exploration vs exploitation
++ *そもそものタイブレーキングのきちんとした定量的評価*
+  + 論文にはさらに詳細な実験結果あり
++ *乱択深さタイブレーキング(RandomDepth Tiebreaking)*
+  + *h-based Tiebreaking* では不十分
++ *Final Plateauを詳細に分析*
+  + *深さに偏りがあるのは良くない*
 
 * Future Work -- Connections to the Other Areas
 

@@ -211,8 +211,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.2544232"
-     inkscape:cx="274.94817"
-     inkscape:cy="222.91628"
+     inkscape:cx="497.27298"
+     inkscape:cy="221.32192"
      inkscape:document-units="in"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -236,7 +236,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -360,8 +360,8 @@
     <rect
        ry="6.8492451"
        rx="5.29532"
-       y="297.06723"
-       x="232.59729"
+       y="309.82208"
+       x="223.03114"
        height="42.130119"
        width="86.00724"
        id="rect12256-8-6"
@@ -369,25 +369,28 @@
     <text
        sodipodi:linespacing="125%"
        id="text8924-4-9"
-       y="329.15796"
-       x="244.08023"
+       y="341.91281"
+       x="234.51408"
        style="font-size:31.11922836px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
        xml:space="preserve"><tspan
-         y="329.15796"
-         x="244.08023"
+         y="341.91281"
+         x="234.51408"
          sodipodi:role="line"
          id="tspan16300-1-6">f = f*</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:31.11922836px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:5.24404192;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
-       x="22.321014"
-       y="34.95842"
+       style="font-size:28px;font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;text-indent:0;text-align:end;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:end;baseline-shift:baseline;opacity:0.89830508;color:#000000;fill:#0197fd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:'M+ 2c';-inkscape-font-specification:'M+ 2c Ultra-Bold'"
+       x="698.55371"
+       y="290.29605"
        id="text8370"
-       sodipodi:linespacing="125%"
-       transform="translate(-41.868474,254.932)"><tspan
+       sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan8372"
-         x="22.321014"
-         y="34.95842">Traditional understanding of the search space</tspan></text>
+         x="698.55371"
+         y="290.29605"
+         id="tspan3035">「よくある」探索空間の理解 (低次元でしか成り立たない)</tspan><tspan
+         sodipodi:role="line"
+         x="698.55371"
+         y="325.29605"
+         id="tspan3039">→薄いFinal Plateau</tspan></text>
   </g>
 </svg>
