@@ -764,7 +764,7 @@ significant improvement both in the IPC instances and in Zerocost instances.
 
 * Woodworking問題での深さの分布
 
-"cut" action has positive cost (consumes wood), others have 0 cost
+
 
 #+BEGIN_CENTER
   
@@ -779,7 +779,7 @@ we plotted the number of nodes in each depth.
 
 * Woodworking問題での深さの分布
 
-"cut" action has positive cost (consumes wood), others have 0 cost
+
 
 #+BEGIN_CENTER
   
@@ -793,7 +793,7 @@ Now we can first see FIFO is too biased toward the shallower region.
 
 * Woodworking問題での深さの分布
 
-"cut" action has positive cost (consumes wood), others have 0 cost
+
 
 #+BEGIN_CENTER
   
@@ -807,7 +807,7 @@ And LIFO is too biased toward the deeper region.
 
 * Woodworking問題での深さの分布
 
-"cut" action has positive cost (consumes wood), others have 0 cost
+
 
 #+BEGIN_CENTER
   
