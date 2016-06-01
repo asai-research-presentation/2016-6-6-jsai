@@ -453,7 +453,7 @@ In such as setting, the domain will assign 0 to all action costs except drive-tr
 #+END_CONTAINER-FLUID
 
 #+BEGIN_ALIGNRIGHT
-*LIFOを上回る性能を達成するためには*, もう一段踏み込んだ分析が必要。
+*LIFOを上回る性能を達成するためには, このFinal Plateauの分析が必要。*
 #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
