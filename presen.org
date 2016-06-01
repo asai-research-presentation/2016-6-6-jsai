@@ -527,12 +527,12 @@ a plateau entrance, and its depth is 0.
 If the parent of a node have the same f and h value, then the child has a depth larger by one.
 #+END_RESUME
 
-* 深さをどう使う?
+* Depthは解の最適性に影響しない
 
 Final Plateau f=f^* では, *どのゴールもコスト最適* で、深さは関係ない
 
 #+BEGIN_ALIGNRIGHT
-なぜなら *どの辺もゼロコストだから.*
+← *どの辺もゼロコストだから.*
 #+END_ALIGNRIGHT
 
 [[png:final-plateau4-2]]
@@ -543,7 +543,7 @@ Final Plateau f=f^* では, *どのゴールもコスト最適* で、深さは�
 #+END_LARGER
 #+END_ALIGNRIGHT
 
-** 例: 常に浅いところから探索するのは良くない
+** 例えば: 常に浅いところから探索するのは良くない
 
 # /FirstDepth/ tiebreaking strategy : ［ h, /fd/ ］
 
@@ -558,7 +558,7 @@ FirstDepth tends to search the neighborhood of plateau entrance exhaustively,
 and takes too much time to reach the appropriate depth.
 #+END_RESUME
 
-** 例: 常に深いところから探索するのも良くない
+** 例えば: 常に深いところから探索するのも良くない
 
 # /LastDepth/ tiebreaking strategy :  ［ h, /ld/ ］
 
