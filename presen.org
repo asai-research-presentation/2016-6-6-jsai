@@ -30,11 +30,11 @@ Presented in AAAI-16, Feb 15 2016
 * 先に結果: /A*の性能をタイブレーキングを変えるだけで改善!!/
 
 #+BEGIN_CENTER
-2GBメモリ制限で30分以内に解けた問題の数
+計1724問中, 1題あたり2GBメモリ制限,30分以内に解けた問題の数
 #+END_CENTER
 
 |                         | <c>                           | <c>           |
-|                         | Fast Downward (2006〜)        | 提案手法      |
+|                         | Fast Downward                 | 提案手法      |
 | 問題セット              | State-of-the-Art 探索システム |               |
 |-------------------------+-------------------------------+---------------|
 | IPC^1 Instances (1104)  | 558                           | *573*         |
@@ -45,7 +45,7 @@ Presented in AAAI-16, Feb 15 2016
 
 IPC^1 : International Planning Competition で使われる 高次元グラフ探索ベンチマーク
 
-(20〜50問)×(35種類の問題集)
+IPC=(20〜50問)×(35種類の問題集) Zerocost=(20〜50問)×(28種類の問題集)
 
 それぞれの問題集は全く異なる性質の *最適化問題をモデル化*
 
@@ -53,7 +53,7 @@ IPC^1 : International Planning Competition で使われる 高次元グラフ探
 
 #+BEGIN_ALIGNRIGHT
 #+BEGIN_LARGER
-*53問 多く解ける = スゴイ速い*
+*53問 多く解ける = 速い*
 #+END_LARGER
 #+END_ALIGNRIGHT
 
@@ -99,7 +99,7 @@ IPC^1 : International Planning Competition で使われる 高次元グラフ探
 経路を見つけることと、見つけた経路が最小である証明を同時に行う必要があります。
 #+END_RESUME
 
-* A* で最短経路探索 ?
+* A* じゃ 最短経路探索 の主要な手法
 
 [[png:astar]]
 
@@ -119,7 +119,7 @@ A* は f* よりもf値が小さい全てのノードを展開する必要があ
 しかし、この説明はA*の大切なある側面を見落としています。
 #+END_RESUME
 
-* A* で最短経路探索 ただしタイブレーキング無視!
+* A* じゃ 最短経路探索 の主要な手法 ただしタイブレーキング無視!
 
 [[png:astar-emph]]
 
@@ -134,22 +134,23 @@ have the same f-minimum? In such cases, a tiebreaking strategy should select whi
 *同じ /f_{min}/ なノードが複数あったときどうする?*
 #+END_CENTER
 
-|----------------------------------+------------------------------------|
-| *太古の昔*                       |                                    |
-| /1968 Hart, Nilsson and Raphael/ | */h/-based tiebreaking* [ /h/ ] :  |
-| (*/最初のA*の論文/*)             | 　　 -- h値が小さなものを選択      |
-|                                  |                                    |
-| /1985ごろにはすでに有名/         | *LIFO tiebreaking* [LIFO] :        |
-|                                  | 　　 -- 最後に生成したノードを選択 |
-|----------------------------------+------------------------------------|
-| *最近は...*                      |                                    |
-| /2007 Hansen and Zhou/           | [ /h/ ] "が一番うまく行くと        |
-|                                  | 　　　　　　一般的に知られている"  |
-| /2010 Holte/                     | [ /h/ ] "がよく使われる"           |
-|----------------------------------+------------------------------------|
+|-------------------------------------+------------------------------------|
+| /1968 Hart, Nilsson and Raphael/ → | */h/-based tiebreaking* [ /h/ ] :  |
+| (*/最初のA*の論文/*)                | 　　 -- h値が小さなものを選択      |
+|                                     |                                    |
+| /1985ごろにはすでに有名/         → | *LIFO tiebreaking* [LIFO] :        |
+|                                     | 　　 -- 最後に生成したノードを選択 |
+|-------------------------------------+------------------------------------|
+| *最近は...*                         |                                    |
+| /2007 Hansen and Zhou/              | [ /h/ ] "が一番うまく行くと        |
+|                                     | 　　　　　　一般的に知られている"  |
+| /2010 Holte/                        | [ /h/ ] "がよく使われる"           |
+|-------------------------------------+------------------------------------|
 
 #+BEGIN_ALIGNRIGHT
-*「常識」= [ /h/ ] タイブレーキングだが、それって迷信では??*
+#+BEGIN_LARGER
+*[ /h/ ] タイブレーキングが「常識」→ だが、本当に正しいのか？*
+#+END_LARGER
 #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
@@ -187,20 +188,18 @@ Overall, it seems that the current rule-of-thumb is to use h-based tiebreaking.
   #+END_SMALLER
   #+END_ALIGNRIGHT
 
-|---------------------------------------------------+-----------------------------------------|
-| 古典プランニングState-of-the-Art Fast Downward    | [ /h/, *FIFO* (*論文には書かれてない*)] |
-| /2012 Burns et. al./ がGithubで公開しているコード | [ /h/, *LIFO* (*論文には書かれてない*)] |
-|                                                   | ほかも大抵書いてない                    |
-|---------------------------------------------------+-----------------------------------------|
+|----------------------------------------------------------+-----------------------------------|
+| 古典プランニングState-of-the-Art Fast Downward           | [ /h/, *FIFO* (*論文に明記なし*)] |
+| 15/24パズルのState-of-the-Art ソルバ /2012 Burns et.al./ | [ /h/, *LIFO* (*論文に明記なし*)] |
+|----------------------------------------------------------+-----------------------------------|
 
 #+BEGIN_ALIGNRIGHT
 #+BEGIN_LARGER
-+ そんな細かいこと (第二段階) は *書くほどのことでもない?*
++ 推測: そんな細かいことは *書くほどのことでもない* という認識?
 
-  (下界関数の改善やA*自体の拡張など他に注目しがち)
+  (なぜなら、下界関数の改善やA*自体の拡張など他に注目しがち)
 #+END_LARGER
 #+END_ALIGNRIGHT
-
 
 #+BEGIN_RESUME
 However, h-based tiebreaking has a severe problem that it is still underspecified.
@@ -214,11 +213,11 @@ Both of these are not specified in the paper.
 In other words, these details are not considered important.
 #+END_RESUME
 
-* でも実際は、 タイブレーク法は /超重要/
+* 実際は、 タイブレーク法は /超重要/
 
 #+BEGIN_LARGER
 #+BEGIN_CENTER
-*探索時間のほとんどは* */タイブレークに費やされる/.*
+*探索時間のほとんどは* */タイブレークのみによって制御される/.*
 #+END_CENTER
 #+END_LARGER
 
@@ -235,10 +234,12 @@ In other words, these details are not considered important.
 #+BEGIN_CENTER
 *探索空間中 ほとんどの*
 
-*ノードが f=f^**.
+*ノードが f=f^** (*Final Plateau*).
 
-( *Final Plateau* と呼ぶ。
-小さい順に探索して最後だから)
+#+BEGIN_SMALLER
+(*Plateau* = 同じf値を持つノード集合.
+小さい順に探索して最後だからFinal)
+#+END_SMALLER
 #+END_CENTER
 
 　
@@ -268,7 +269,7 @@ Thus, in this plateau,
 the search is controlled solely by the tiebreaking.
 #+END_RESUME
 
-* 第二段階のタイブレークが重要か調べてみた
+* 第二段階のタイブレークは重要か？
 
 | <c>                           | <c>                                     | <c>       |
 | Tiebreaking                   | 説明                                    | Solved    |
@@ -306,7 +307,7 @@ If there are still multiple nodes have the same h value, it breaks ties accordin
 We tested these strategies on IPC instances.
 #+END_RESUME
 
-* 第二段階のタイブレークが重要か調べてみた → 重要だった!
+* 第二段階のタイブレークは重要か？ → 重要だった!
 
 | <c>                           | <c>                                     | <c>       |
 | Tiebreaking                   | 説明                                    | Solved    |
@@ -338,7 +339,7 @@ surprising result, considering that only the 2nd tiebreaking
 difference caused such a difference.
 #+END_RESUME
 
-* TODO [h,FIFO] と [h,LIFO] をドメイン (問題セット) ごとに比較
+* いつどのように早い？ ドメイン (問題セット) ごとに比較
 
 #+BEGIN_CENTER
 ( 1104題 = (20〜50問)×(35種類の問題集))
@@ -366,9 +367,9 @@ difference caused such a difference.
 
 　
 
-補足:
+# 補足:
 
-( /*h*/ なし→どのドメインでもLIFOの圧勝)
+# ( /*h*/ なし→どのドメインでもLIFOの圧勝)
 #+END_CENTER
 #+END_SPAN6
 #+END_ROW-FLUID
@@ -397,13 +398,13 @@ and Cybersec.
   #+BEGIN_ALIGNRIGHT
   「運転」アクション以外は *ゼロコスト* (例: 荷物の受け渡しに燃料は必要ない)
   #+END_ALIGNRIGHT
-+ *Openstacks は OR分野の問題* (Fink and Voss, 1999)
++ *Openstacks は 工場で同時生産する製品数を最小化* (Fink and Voss, 1999)
   #+BEGIN_ALIGNRIGHT
-  用いる *stack* の数を最小化、 *stack* を使わない行為はゼロコスト
+  製品ごとに専有区画 *stack* を消費。 *stack* を使わない行為はゼロコスト
   #+END_ALIGNRIGHT
-+ *Cybersec(urity) も実問題由来* (BAMS システム, Boddy et. al. 2005)
++ *Cybersec(urity) も実問題由来* (BAMS 検証システム, Boddy et. al. 2005)
   #+BEGIN_ALIGNRIGHT
-  企業ネットワークを自動攻撃する検証システム, 必要なパスワード解析の回数を最小化
+  企業ネットワークを自動攻撃, データ奪取に必要なパスワード解析回数を最小化
   #+END_ALIGNRIGHT
 
 #+BEGIN_RESUME
@@ -420,7 +421,7 @@ Another interesting example is a realistic transportation domain with fuel optim
 In such as setting, the domain will assign 0 to all action costs except drive-truck.
 #+END_RESUME
 
-* TODO ゼロコストがあると /*h*/ によるタイブレークが働かない
+* ゼロコストがあると /*h*/ によるタイブレークが働かない
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
@@ -492,8 +493,6 @@ because any heuristic estimates are the same almost everywhere.
 #+END_RESUME
 
 * Final Plateau の分析
-
-*/常に コスト ＞ ０/ なドメインに限れば、*
 
 [[png:final-plateau2]]
 
@@ -605,11 +604,13 @@ This is an interesting aspect similar to Rapidly exploring Random Tree.
 * 評価 (用いた問題集)
 
 + IPC^1 問題集 (20〜50問)×(35種類)
+  + 元のドメインはアクションの数だけを数える→非現実的
 + *Zero-cost* 問題集 (620 instances, 28 domains)
   + IPC^1 を *資源消費最適化問題* 改変したもの。例:
     + Woodworking ドメイン: 元問題:最短工程を探索→ 木材消費の最適化
     + Driverslog (運送ドメイン): 最短工程 → 燃料消費の最適化
-    + etc..
+  + IPCの問題集には歴史的経緯から全ての辺のコストが1のドメインが多い(非現実的)
+  + 提案したZero-cost 問題集のほうが *より現実的*
 
 #+BEGIN_NOTE
 1 -- IPC : International Planning Competition
@@ -626,7 +627,7 @@ such as wood, fuel or electricity.
 We created 620 zerocost instances consisting of 28 domains.
 #+END_RESUME
 
-* 評価 (用いた探索設定 (おさらい))
+* 評価 (用いた探索設定 (おさらい))                                 :noexport:
 
 #+BEGIN_CONTAINER-FLUID
 #+BEGIN_ROW-FLUID
@@ -706,21 +707,20 @@ LMcut, Merge-and-Shrink(M&S) : state-of-the-art ヒューリスティック関�
 ［h, RD, RO］ は 10回の平均
 #+END_SMALLER
 
-| /                       | <            | >           | <>                |
-|                         | <c>          | <c>         | <c>               |
-|                         | ［h, FIFO］  | ［h, LIFO］ | ［h, RD, RO］     |
-| Domain Set              | (FD Default) |             | (Proposed)        |
-|-------------------------+--------------+-------------+-------------------|
-| LMcut                   |              |             |                   |
-| IPC Instances (1104)    |              |             |                   |
-| Zerocost Instances(680) |              |             |                   |
-| Sum(1724)               |              |             |                   |
-|-------------------------+--------------+-------------+-------------------|
-| M&S                     |              |             |                   |
-| IPC Instances (1104)    |              |             |                   |
-| Zerocost Instances(680) |              |             |                   |
-| Sum(1724)               |              |             |                   |
-|-------------------------+--------------+-------------+-------------------|
+
+| /                       | <            | >           | <>            |
+|                         | <c>          | <c>         | <c>           |
+|                         | ［h, FIFO］  | ［h, LIFO］ | ［h, RD, RO］ |
+| Domain Set              | (FD Default) |             | (Proposed)    |
+|-------------------------+--------------+-------------+---------------|
+| IPC Instances (1104)    |              |             |               |
+| Zerocost Instances(680) |              |             |               |
+| Sum(1724)               |              |             |               |
+|-------------------------+--------------+-------------+---------------|
+# | M&S                     |              |             |               |
+# | IPC Instances (1104)    |              |             |               |
+# | Zerocost Instances(680) |              |             |               |
+# | Sum(1724)               |              |             |               |
 
 #+BEGIN_RESUME
 We tested these tiebreakings with a standard competition setting of 30 min,
@@ -732,7 +732,8 @@ whose values are computed in a completely different manner.
 * 評価 (制限時間内に解けた問題の数)
 
 #+BEGIN_SMALLER
-LMcut, Merge-and-Shrink(M&S) : state-of-the-art ヒューリスティック関数
+LMcut : state-of-the-art ヒューリスティック関数
+# LMcut, Merge-and-Shrink(M&S) : state-of-the-art ヒューリスティック関数
 
 ［h, RD, RO］ は 10回の平均
 #+END_SMALLER
@@ -742,16 +743,14 @@ LMcut, Merge-and-Shrink(M&S) : state-of-the-art ヒューリスティック関�
 |                         | ［h, FIFO］  | ［h, LIFO］ | ［h, RD, RO］     |
 | Domain Set              | (FD Default) |             | (Proposed)        |
 |-------------------------+--------------+-------------+-------------------|
-| LMcut                   |              |             |                   |
 | IPC Instances (1104)    | 558          | 565         | *572.8* (↑ 14.8) |
 | Zerocost Instances(680) | 256          | 279         | *294.2* (↑ 38.2) |
 | Sum(1724)               | 814          | 844         | *867.0* (↑ 53.0) |
 |-------------------------+--------------+-------------+-------------------|
-| M&S                     |              |             |                   |
-| IPC Instances (1104)    | 479          | *488*       | 484.0 (↑ 5.0)    |
-| Zerocost Instances(680) | 276          | 290         | *310.2* (↑ 34.2) |
-| Sum(1724)               | 755          | 778         | *794.2* (↑ 39.2) |
-|-------------------------+--------------+-------------+-------------------|
+# | M&S                     |              |             |                   |
+# | IPC Instances (1104)    | 479          | *488*       | 484.0 (↑ 5.0)    |
+# | Zerocost Instances(680) | 276          | 290         | *310.2* (↑ 34.2) |
+# | Sum(1724)               | 755          | 778         | *794.2* (↑ 39.2) |
 
 #+BEGIN_ALIGNRIGHT
 *［h, RD, RO］ は [h,FIFO] と [h,LIFO] より圧倒的に良い!*

@@ -96,14 +96,14 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1440"
-     inkscape:window-height="818"
+     inkscape:window-width="1024"
+     inkscape:window-height="688"
      id="namedview4"
      showgrid="false"
-     inkscape:zoom="1.0402414"
-     inkscape:cx="-20.5386"
-     inkscape:cy="206.76534"
-     inkscape:window-x="768"
+     inkscape:zoom="2.942247"
+     inkscape:cx="272.66257"
+     inkscape:cy="293.14382"
+     inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="1"
      inkscape:current-layer="g4191"
@@ -233,6 +233,38 @@
          x="311.94058"
          sodipodi:role="line"
          id="tspan3054">(A*の探索する全ノード)</tspan></text>
+    <g
+       transform="translate(43.714776,-39.243372)"
+       id="g3035"
+       style="fill:#ffff00;stroke:#ffff00">
+      <path
+         transform="matrix(1.2814815,0,0,1.2814815,5.0967672e-7,-4.2110375)"
+         inkscape:connector-curvature="0"
+         id="path3013"
+         d="m 262.04462,128.93088 6.24523,6.24523"
+         style="fill:#ffff00;stroke:#ffff00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3013-3"
+         d="m 343.80848,161.0115 -8.00315,8.00315"
+         style="fill:#ffff00;stroke:#ffff00;stroke-width:1.2814815px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       transform="translate(52.478733,-47.596324)"
+       id="g3035-9"
+       style="fill:#ffff00;stroke:#ffff00">
+      <path
+         transform="matrix(1.2814815,0,0,1.2814815,5.0967672e-7,-4.2110375)"
+         inkscape:connector-curvature="0"
+         id="path3013-39"
+         d="m 262.04462,128.93088 6.24523,6.24523"
+         style="fill:#ffff00;stroke:#ffff00;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3013-3-3"
+         d="m 343.80848,161.0115 -8.00315,8.00315"
+         style="fill:#ffff00;stroke:#ffff00;stroke-width:1.2814815px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
   </g>
   <path
      style="fill:none;stroke:#000000;stroke-width:0.81983805px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
